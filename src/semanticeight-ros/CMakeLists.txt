@@ -12,7 +12,7 @@ project(semanticeight_ros VERSION 0.1.0 LANGUAGES C CXX)
 # ------------------------------------------------------------------------------
 set(CMAKE_CXX_STANDARD 17)
 option(WITH_OPENMP "Compile with OpenMP" ON)
-option(WITH_MASKRCNN "Compile with libmaskrcnn-trt" ON)
+option(WITH_MASKRCNN "Compile with libmaskrcnn-trt" OFF)
 option(WITH_ASAN "Compile with the address sanitizer" OFF)
 option(WITH_UBSAN "Compile with the undefined behavior sanitizer" OFF)
 
