@@ -5,7 +5,7 @@ install/
 
 # 自动生成代码（保留 .msg/.srv 定义）
 # **/msg/*.msg
-**/srv/*.srv
+# **/srv/*.srv
 **/action/*.action
 
 # 系统/编辑器文件
