@@ -1,0 +1,55 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Python
+*.pyc
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Directories
+build*
+doc/html
+se_tools/benchmark_scripts/results*
+se_tools/evaluation_scripts/results
+
+# Benchmark results
+test.bin
+
+# vim temporary files
+*.swp
+
+# Test results
+se_core/test/out/
+
+# ctags
+tags
+TAGS
+

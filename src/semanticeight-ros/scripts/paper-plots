@@ -1,0 +1,88 @@
+#!/usr/bin/env python3
+import argparse
+import csv
+import matplotlib.pyplot as plt
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Plot the percentage of objects found over time.")
+    parser.add_argument("old", metavar="OLDDIR",
+        help="the directory containing the TSV files for the old method")
+    parser.add_argument("new", metavar="NEWDIR",
+        help="the directory containing the TSV files for the new method")
+    parser.add_argument("-o", "--plotdir", metavar="DIR",
+        help="the directory where the plots will be saved")
+    args = parser.parse_args()
+    if not args.plotdir:
+        args.plotdir = args.new
+    return args
+
+
+class Data:
+    def __init__(self, filename: str):
+        self.filename = filename
+        self.t = []
+        self.median = []
+        self.p10 = []
+        self.p90 = []
+        self.mean = []
+        self.stdev = []
+        with open(filename) as f:
+            r = csv.reader(f, dialect=csv.excel_tab)
+            header = next(r)
+            self.t_name = header[0]
+            self.name = header[1]
+            if self.name.endswith(" median"):
+                self.name = self.name[0:-len(" median")]
+            for line in r:
+                self.t.append(float(line[0]))
+                self.median.append(float(line[1]))
+                self.p10.append(float(line[2]))
+                self.p90.append(float(line[3]))
+                self.mean.append(float(line[4]))
+                self.stdev.append(float(line[5]))
+        self.low_stdev = [m - s for m, s in zip(self.mean, self.stdev)]
+        self.high_stdev = [m + s for m, s in zip(self.mean, self.stdev)]
+
+    def plot(self, label: str, color, linestyle: str="-", ax=None):
+        if ax:
+            fig = ax.figure
+        else:
+            fig, ax = plt.subplots()
+        ax.set_xlabel(self.t_name)
+        ax.set_ylabel(self.name)
+        ax.plot(self.t, self.median, color=color, linestyle=linestyle, label=label)
+        ax.fill_between(self.t, self.p10, self.p90, color=color, alpha=0.3, linewidth=0)
+        ax.set_xlim(min(self.t), max(self.t))
+        if self.name.endswith("(%)") or self.name.endswith("(\\%)"):
+            ax.set_ylim(0, 100)
+            ax.set_aspect(16.5)
+        else:
+            ax.set_ylim(0, 0.020)
+            ax.set_aspect(86200)
+        return fig, ax
+
+
+if __name__ == "__main__":
+    args = parse_args()
+    filenames = ["bg_accuracy", "bg_completeness", "bg_dist",
+            "object_accuracy", "object_completeness", "object_dist",
+            "objects_found", "volume"]
+    for filename in filenames:
+        data_old = Data(f"{args.old}/{filename}.tsv")
+        data_new = Data(f"{args.new}/{filename}.tsv")
+
+        plt.rcParams.update({
+            "text.usetex": True,
+            "font.family": "serif",
+            "font.serif": ["Liberation Serif"],
+        })
+        plt.rcParams["font.size"] = 24
+        plt.rcParams["font.size"] = 24
+        fig, ax = plt.subplots()
+        data_old.plot("Classic", "#0000FF", "--", ax)
+        data_new.plot("Semantic", "#00FF00", "-", ax)
+        ax.grid()
+        ax.legend(loc="lower right")
+        plt.savefig(f"{args.plotdir}/{filename}.pdf", bbox_inches="tight", pad_inches=0.01)

@@ -1,0 +1,65 @@
+#!/bin/sh
+# SPDX-FileCopyrightText: 2022 Smart Robotics Lab, Imperial College London
+# SPDX-FileCopyrightText: 2022 Sotiris Papatheodorou
+# SPDX-License-Identifier: CC0-1.0
+set -eu
+
+usage() {
+	printf 'Usage: %s DIR ...\n' "${0##*/}"
+}
+
+mesh_comparison_log() {
+	find -L "$@" -type f -path '*/meshes/mesh_comparison.log'
+}
+
+mesh_comparison_tsv() {
+	find -L "$@" -type f -path '*/meshes/mesh_comparison.tsv'
+}
+
+bg_evaluation_tsv() {
+	find -L "$@" -type f -path '*/meshes/bg_evaluation.tsv'
+}
+
+object_stats() {
+	# https://git.sr.ht/~sotirisp/dots/blob/master/.local/bin/tsvavg
+	# shellcheck disable=SC2046
+	object_tsvs=$(mesh_comparison_tsv "$@")
+	if [ -n "$object_tsvs" ]
+	then
+		tsvavg -a $object_tsvs |
+			tsvcut '^Accuracy' '^Completeness' '^Mean observed dist' '^Desired observed dist' |
+			tsv2text
+	fi
+}
+
+bg_stats() {
+	# https://git.sr.ht/~sotirisp/dots/blob/master/.local/bin/tsvavg
+	# shellcheck disable=SC2046
+	bg_tsvs=$(bg_evaluation_tsv "$@")
+	if [ -n "$bg_tsvs" ]
+	then
+		tsvavg -a $bg_tsvs |
+			tsvcut '^Accuracy' '^Completeness' '^Mean observed dist' '^Desired observed dist' |
+			tsv2text
+	fi
+}
+
+
+
+if [ "$#" -eq 0 ]
+then
+	usage
+	exit 2
+fi
+
+. "$(dirname "$0")/lib.sh"
+
+num_runs=$(mesh_comparison_tsv "$@" | wc -l)
+if [ "$num_runs" -gt 1 ]
+then
+	printf 'Data averaged over %d runs\n' "$num_runs"
+fi
+objects_found $(mesh_comparison_log "$@")
+object_stats "$@"
+printf 'Background\n'
+bg_stats "$@"

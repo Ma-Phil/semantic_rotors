@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2022 Smart Robotics Lab, Imperial College London
+# SPDX-FileCopyrightText: 2022 Sotiris Papatheodorou
+# SPDX-License-Identifier: CC0-1.0
+
+supereight_ros:
+  control_interface: "habitat"
+  visualize_360_raycasting: true
+
+supereight:
+  general:
+    sequence_name:              "experiment_handheld"
+
+  sensor:
+    # Intel RealSense D455, serial number 032522250421
+    intrinsics: [387.285, 387.414, 315.256, 256.379]
+    distortion: [-0.0425272, 0.034683, 0.00117961, 0.000772407]
+    # Using the d455_ros vicon object which is x-forward, z-up
+    T_BC:       [-0.00234278, -0.0282227, 0.999599, 0.0404913,
+                 -0.999966, -0.00786702, -0.00256576, 0.0339505,
+                 0.00793627, -0.999571, -0.0282033, -0.00136162,
+                 0, 0, 0, 1]
+

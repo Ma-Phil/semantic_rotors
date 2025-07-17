@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!-- SPDX-FileCopyrightText: 2020-2022 Smart Robotics Lab, Imperial College London -->
+<!-- SPDX-FileCopyrightText: 2020-2022 Sotiris Papatheodorou -->
+<!-- SPDX-License-Identifier: CC0-1.0 -->
+<launch>
+  <!-- Sequence-specific config file. -->
+  <arg name="config" default="$(find semanticeight_ros)/config/habitat.yaml"/>
+  <!-- Launch rviz. -->
+  <arg name="rviz" default="false"/>
+  <!-- Perform non-semantically-guided exploration as in ICRA 2020. -->
+  <arg name="classic" default="false"/>
+  <!-- Enable teleoperation of the MAV instead of using the autopilot. -->
+  <arg name="teleop" default="false"/>
+
+  <!-- Initial Waypoint sent to the autopilot. -->
+  <arg name="waypoint_x" value="0.0"/>
+  <arg name="waypoint_y" value="0.0"/>
+  <arg name="waypoint_z" value="0.0"/>
+
+  <!-- Set the ROS log level in rosconsole.conf -->
+  <env name="ROSCONSOLE_CONFIG_FILE" value="$(find semanticeight_ros)/config/rosconsole.conf"/>
+
+  <node pkg="habitat_ros"
+        type="habitat_node.py"
+        name="habitat"
+        clear_params="true"
+        output="screen"
+        required="true">
+    <rosparam command="load" file="$(find semanticeight_ros)/config/habitat.yaml"/>
+    <rosparam command="load" file="$(arg config)"/>
+    <!-- Hide Habitat-Sim logs -->
+    <env name="GLOG_minloglevel" value="1"/>
+    <env name="MAGNUM_LOG" value="quiet"/>
+    <remap from="/habitat/external_pose" to="/teleop/command" if="$(arg teleop)"/>
+  </node>
+
+  <node pkg="semanticeight_ros"
+        type="semanticeight_ros"
+        name="semanticeight"
+        clear_params="true"
+        output="screen"
+        required="true"
+        launch-prefix="">
+    <param name="wp_x" type="double" value="$(arg waypoint_x)" unless="$(arg teleop)"/>
+    <param name="wp_y" type="double" value="$(arg waypoint_y)" unless="$(arg teleop)"/>
+    <param name="wp_z" type="double" value="$(arg waypoint_z)" unless="$(arg teleop)"/>
+    <rosparam command="load" file="$(find semanticeight_ros)/config/habitat.yaml"/>
+    <rosparam command="load" file="$(arg config)"/>
+    <rosparam command="load" file="$(find semanticeight_ros)/config/classic.yaml" if="$(arg classic)"/>
+    <remap from="/camera/depth_image" to="/habitat/depth/image_raw"/>
+    <remap from="/camera/rgb_image"   to="/habitat/rgb/image_raw"/>
+    <remap from="/camera/class"       to="/habitat/semantic_class/image_raw"/>
+    <remap from="/camera/instance"    to="/habitat/semantic_instance/image_raw"/>
+    <remap from="/pose"               to="/habitat/pose"/>
+  </node>
+
+  <group unless="$(arg teleop)">
+    <param name="wp_x" type="double" value="$(arg waypoint_x)"/>
+    <param name="wp_y" type="double" value="$(arg waypoint_y)"/>
+    <param name="wp_z" type="double" value="$(arg waypoint_z)"/>
+    <remap from="/autopilot/trajectory" to="/supereight/path"/>
+    <!-- <include file="$(find mpc)/launch/firefly_habitat.launch"/> -->
+  </group>
+
+  <include file="$(find semanticeight_ros)/launch/rviz.launch" if="$(arg rviz)"/>
+</launch>

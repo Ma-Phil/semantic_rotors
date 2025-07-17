@@ -1,0 +1,12 @@
+# SPDX-FileCopyrightText: 2022 Smart Robotics Lab, Imperial College London
+# SPDX-FileCopyrightText: 2022 Sotiris Papatheodorou
+# SPDX-License-Identifier: CC0-1.0
+
+supereight_ros:
+  control_interface: "habitat"
+  visualize_360_raycasting: true
+
+supereight:
+  general:
+    sequence_name:              "experiment_handheld"
+

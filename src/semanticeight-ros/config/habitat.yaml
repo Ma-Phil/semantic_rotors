@@ -1,0 +1,116 @@
+# SPDX-FileCopyrightText: 2019-2020 Smart Robotics Lab, Imperial College London
+# SPDX-FileCopyrightText: 2019 Anna Dai
+# SPDX-FileCopyrightText: 2020 Sotiris Papatheodorou
+# SPDX-License-Identifier: CC0-1.0
+
+# Supereight ROS node settings
+supereight_ros:
+  enable_tracking: false
+  enable_rendering: false
+  enable_rgb: true
+  enable_objects: true
+  pose_topic_type: "geometry_msgs::PoseStamped"
+  pose_buffer_size: 100
+  depth_buffer_size: 10
+  rgb_buffer_size: 10
+  max_timestamp_diff: 0.02
+  center_at_first_position: false
+  visualization_rate: 0
+  visualization_max_z: 3.5
+  visualize_360_raycasting: false
+  max_exploration_time: .NaN
+  run_segmentation: false
+  dataset: "Matterport3D"
+  control_interface: "SRL"
+
+# Habitat-ROS node settings
+habitat:
+  # Sensor settings
+  width: 640
+  height: 480
+  near_plane: 0.1
+  far_plane: 20.0
+  f: 525.0
+  fps: 30
+  enable_semantics: true
+  depth_noise: false
+  allowed_classes: []
+
+  # Scene settings
+  scene_file: "habitat_sim/data/scene_datasets/habitat-test-scenes/skokloster-castle.glb"
+  initial_T_HB: [-1.80, -19.25, 1.00]
+  pose_frame_id: "world"
+  pose_frame_at_initial_T_HB: true
+
+  # Visualization settings
+  visualize_semantics: true
+
+# Simple MAV simulator settings
+habitat_mav_sim:
+  sim_freq: 60
+  a_max: [1.0, 1.0, 0.5]
+  w_max: [0.1, 0.1, 0.05]
+  world_frame_id: "world"
+
+# Supereight settings
+supereight:
+  general:
+    sequence_name:              "habitat_skokloster_castle"
+    sequence_type:              "ros"
+    log_path:                   "$ROS_LOG_DIR/latest/logs"
+    output_render_path:         "$ROS_LOG_DIR/latest/renders"
+    enable_meshing:             true
+    output_mesh_path:           "$ROS_LOG_DIR/latest/meshes"
+    # Rates
+    tracking_rate:              1
+    integration_rate:           1
+    rendering_rate:             0
+    meshing_rate:               50
+    fps:                        0.0
+    # Other
+    drop_frames:                false
+    max_frame:                  -1
+    icp_threshold:              1e-5
+    bilateral_filter:           false
+    pyramid:                    [10, 5, 4]
+
+  map:
+    size:                       1024
+    dim:                        40.96
+    t_MW_factor:                [0.501, 0.501, 0.501]
+    sampling_min_W:             [-10000, -10000, -10000]
+    sampling_max_W:             [ 10000,  10000,  10000]
+    frontier_cluster_min_volume: 0.015625
+
+  sensor:
+    intrinsics:                 [525, 525, 319.5, 239.5]
+    downsampling_factor:        2
+    T_BC:                       [ 0.0,  0.0, 1.0, 0.0,
+                                 -1.0,  0.0, 0.0, 0.0,
+                                  0.0, -1.0, 0.0, 0.0,
+                                  0.0,  0.0, 0.0, 1.0]
+    init_T_WB:                  [1, 0, 0, 0,
+                                 0, 1, 0, 0,
+                                 0, 0, 1, 0,
+                                 0, 0, 0, 1]
+    near_plane:                 0.1
+    far_plane:                  10.0
+
+  exploration:
+    enable_exploration:        true
+    num_candidates:            20
+    frontier_sampling_probability: 0.5
+    utility_weights:           [0.34, 0.33, 0.33]
+    use_pose_history:          true
+    raycast_width:             36
+    raycast_height:            10
+    linear_velocity:           1.5
+    angular_velocity:          0.75
+    robot_radius:              0.125
+    skeleton_sample_precision: 0.05
+    solving_time:              0.1
+
+
+# WARNING: Any voxel parameters added in this file will be ignored. Change the
+# defaults if you need different values.
+

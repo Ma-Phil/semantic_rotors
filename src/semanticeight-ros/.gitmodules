@@ -1,0 +1,12 @@
+# SPDX-FileCopyrightText: 2020 Sotiris Papatheodorou
+# SPDX-License-Identifier: CC0-1.0
+
+[submodule "semanticeight"]
+	path = semanticeight
+	url = ../semanticeight.git
+[submodule "libmaskrcnn-trt"]
+	path = libmaskrcnn-trt
+	url = ../libmaskrcnn-trt.git
+[submodule "mesh-diff-tool"]
+	path = mesh-diff-tool
+	url = ../mesh-diff-tool.git

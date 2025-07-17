@@ -1,0 +1,60 @@
+#!/bin/sh
+# SPDX-FileCopyrightText: 2022 Smart Robotics Lab, Imperial College London
+# SPDX-FileCopyrightText: 2022 Sotiris Papatheodorou
+# SPDX-License-Identifier: CC0-1.0
+set -eu
+
+script_dir() {
+	dirname "$0"
+}
+
+# Usage: store_run_data OUTDIR INDEX
+store_run_data() {
+	# Resolve the symlink to the latest log directory.
+	log_dir=$(readlink -f "$HOME/.ros/log/latest")
+	# Store the log directory in OUTDIR prefixed with the run index.
+	outdir=$(printf '%s/%03d_%s' "$1" "$2" "$(basename "$log_dir")")
+	mkdir -p "$1"
+	mv "$log_dir" "$outdir"
+	# Create a symbolic link to the latest mesh directory if it doesn't
+	# exist.
+	if [ ! -e "$outdir/meshes" ]
+	then
+		(
+		cd "$outdir" || exit
+		latest_mesh_dir=$(find . -type d -name 'meshes_*' | sort | tail -n 1)
+		ln -s "$latest_mesh_dir" meshes
+		)
+	fi
+	printf '%s\n' "$outdir"
+}
+
+
+
+if [ "$#" -lt 2 ]
+then
+	printf 'Usage: %s NUM LAUNCH_FILE [ARG]...\n' "$(basename "$0")"
+	exit 2
+fi
+
+dir="$HOME/semanticeight_logs_$(date '+%Y%m%d_%H%M%S')"
+n="$1"
+shift
+
+# Run the command n times and save the logs.
+i=1
+while [ "$i" -le "$n" ]
+do
+	printf 'Run %d/%d\n' "$i" "$n"
+	tmp_log=$(mktemp)
+	roslaunch semanticeight_ros "$@" 2>&1 | tee "$tmp_log"
+	run_dir=$(store_run_data "$dir" "$i")
+	mv "$tmp_log" "$run_dir"/log
+	# Process this run.
+	"$(script_dir)"/postprocess-run "$run_dir"
+	# Process all runs so far.
+	"$(script_dir)"/generate-plots "$dir"/plots "$dir"/*/logs || true
+	"$(script_dir)"/generate-overview "$dir"/* > "$dir"/overview.txt || true
+	i=$((i+1))
+done
+

@@ -1,0 +1,80 @@
+<launch>
+  <include file="$(find vicon_bridge)/launch/vicon.launch">
+    <arg name="datastream_hostport" value="192.168.1.164:801"/>
+  </include>
+
+  <!-- INTEL REALSENSE D455 -->
+  <node pkg="rs4se"
+      type="intel_d435i"
+      name="D455"
+      required="true"
+      output="screen">
+    <param name="global_time" type="bool" value="true" />
+    <!-- Set to false if running on the NVIDIA Jetson Xavier NX which doesn't
+         have the appropriate kernel modules. -->
+    <param name="correct_ts" type="bool" value="true" />
+
+    <!-- RGBD -->
+    <param name="enable_rgb" type="bool" value="true" />
+    <param name="enable_ir" type="bool" value="true" />
+    <param name="enable_depth" type="bool" value="false" />
+    <param name="enable_emitter" type="bool" value="false" />
+    <param name="rgb_width" value="640"/>
+    <param name="rgb_height" value="480"/>
+    <param name="rgb_frame_rate" value="5"/>
+    <param name="rgb_format" type="str" value="RGB8" />
+    <param name="rgb_exposure" type="double" value="100" />
+    <param name="ir_width" type="int" value="640" />
+    <param name="ir_height" type="int" value="480" />
+    <param name="ir_format" type="str" value="Y8" />
+    <param name="ir_frame_rate" type="int" value="5" />
+    <param name="ir_exposure" type="double" value="12000" />
+    <param name="depth_width" type="int" value="640" />
+    <param name="depth_height" type="int" value="480" />
+    <param name="depth_format" type="str" value="Z16" />
+    <param name="depth_frame_rate" type="int" value="5" />
+
+    <!-- MOTION -->
+    <param name="enable_motion" type="bool" value="true" />
+    <param name="gyro_hz" type="double" value="400" />
+    <param name="accel_hz" type="double" value="250" />
+  </node>
+
+  <!-- Disable image transport plugins -->
+  <group ns="/D455/rgb0/image" >
+    <rosparam param="disable_pub_plugins">
+      - "image_transport/compressed"
+      - "image_transport/compressedDepth"
+      - "image_transport/theora"
+    </rosparam>
+  </group>
+
+  <group ns="/D455/ir0/image" >
+    <rosparam param="disable_pub_plugins">
+      - "image_transport/compressed"
+      - "image_transport/compressedDepth"
+      - "image_transport/theora"
+    </rosparam>
+  </group>
+
+  <group ns="/D455/ir1/image" >
+    <rosparam param="disable_pub_plugins">
+      - "image_transport/compressed"
+      - "image_transport/compressedDepth"
+      - "image_transport/theora"
+    </rosparam>
+  </group>
+
+  <group ns="/D455/depth0/image" >
+    <rosparam param="disable_pub_plugins">
+      - "image_transport/compressed"
+      - "image_transport/compressedDepth"
+      - "image_transport/theora"
+    </rosparam>
+  </group>
+
+  <node pkg="rqt_image_view"
+	type="rqt_image_view"
+	name="image_view"
+	args="/D455/rgb0/image"/>
+</launch>
