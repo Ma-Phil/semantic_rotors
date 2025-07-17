@@ -1,0 +1,19 @@
+# Catkin 构建产物
+build/
+devel/
+install/
+
+# 自动生成代码（保留 .msg/.srv 定义）
+**/msg/*.msg
+**/srv/*.srv
+**/action/*.action
+
+# 系统/编辑器文件
+*~
+*.swp
+*.pyc
+__pycache__/
+
+# IDE
+.vscode/
+.idea/
