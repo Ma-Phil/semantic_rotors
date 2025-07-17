@@ -4,11 +4,11 @@
 <!-- SPDX-License-Identifier: CC0-1.0 -->
 <launch>
   <!-- The name of the world file to load. -->
-  <arg name="world" default="apartment"/>
+  <arg name="world" default="maze"/>
   <!-- Launch rviz. -->
-  <arg name="rviz" default="false"/>
+  <arg name="rviz" default="true"/>
   <!-- Perform non-semantically-guided exploration as in ICRA 2020. -->
-  <arg name="classic" default="true"/>
+  <arg name="classic" default="false"/>
 
   <!-- Initial Waypoint sent to the autopilot. -->
   <arg name="waypoint_x" value="0.0"  if="$(eval world in ['apartment', 'maze'])"/>
@@ -30,9 +30,10 @@
     <env name="GAZEBO_MODEL_PATH" value="${GAZEBO_MODEL_PATH}:$(find rotors_gazebo)/models"/>
     <env name="GAZEBO_RESOURCE_PATH" value="${GAZEBO_RESOURCE_PATH}:$(find rotors_gazebo)/resource"/>
     <arg name="world_name" value="$(find semanticeight_ros)/worlds/$(arg world).world"/>
+    <!-- <arg name="world_name" value="/home/mz/VLM_real/src/FSMP/rotors_simulator/rotors_gazebo/worlds/MAP_river_trees_27.world" /> -->
     <arg name="gui" value="true"/>
     <arg name="paused" value="false"/>
-    <param name="/use_sim_time" value="true"/>
+    <arg name="use_sim_time" value="true"/>
   </include>
 
   <include file="$(find rotors_gazebo)/launch/spawn_mav.launch">
@@ -41,7 +42,7 @@
     <arg name="enable_ground_truth" value="true" />
     <arg name="x" value="$(arg waypoint_x)"/>
     <arg name="y" value="$(arg waypoint_y)"/>
-    <arg name="z" value="0.1"/>
+    <arg name="z" value="1.0"/>
     <arg name="enable_mavlink_interface" default="true"/>
   </include>
 
@@ -77,12 +78,12 @@
     <rosparam command="load" file="$(find rotors_gazebo)/resource/$(arg mav_name).yaml" />
     <!-- <remap from="odometry" to="/firefly/ground_truth/odometry" /> -->
     <remap from="command/trajectory" to="/supereight/path" />
-    <remap from="command/pose" to="/command/pose" />
+    <remap from="command/pose" to="/supereight/pose_control" />
     <remap from="odometry" to="odometry_sensor1/odometry" />
   </node>
   
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <!-- <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" /> -->
   <!-- <node name="hovering_example" pkg="rotors_gazebo" type="hovering_example" output="screen"/> -->
   </group>
   <include file="$(find semanticeight_ros)/launch/rviz.launch" if="$(arg rviz)"/>

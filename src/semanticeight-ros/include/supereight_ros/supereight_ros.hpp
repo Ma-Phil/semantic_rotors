@@ -297,6 +297,7 @@ class SupereightNode {
     tf2_ros::TransformBroadcaster pose_tf_broadcaster_;
     tf2_ros::StaticTransformBroadcaster static_tf_broadcaster_;
     ros::Publisher path_pub_;
+    ros::Publisher pose_pub_;
 
     // Render publishers
     ros::Publisher depth_render_pub_;

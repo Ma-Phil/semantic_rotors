@@ -143,11 +143,11 @@ Path ExplorationPlanner::computeNextPath_WB(const std::set<key_t>& frontiers,
                                             const Objects& objects,
                                             const Eigen::Matrix4f& start_T_WB)
 {
-    std::cout << "**************************函数computeNextPath_WB*************************" << std::endl;
-    // 打印输入的前沿点数量
-    std::cout << "Number of frontiers: " << frontiers.size() << std::endl;
-    // 打印起始位姿
-    std::cout << "Start T_WB:\n" << start_T_WB << std::endl;
+    // std::cout << "**************************函数computeNextPath_WB*************************" << std::endl;
+    // // 打印输入的前沿点数量
+    // std::cout << "Number of frontiers: " << frontiers.size() << std::endl;
+    // // 打印起始位姿
+    // std::cout << "Start T_WB:\n" << start_T_WB << std::endl;
 
     const std::vector<key_t> frontier_vec(frontiers.begin(), frontiers.end());
     const std::lock_guard<std::recursive_mutex> lock(mutex_);
@@ -163,19 +163,19 @@ Path ExplorationPlanner::computeNextPath_WB(const std::set<key_t>& frontiers,
                                          config_);
     // 打印候选视图数量
     candidate_views_ = planner.views();
-    std::cout << "Number of candidate views: " << candidate_views_.size() << std::endl;
+    // std::cout << "Number of candidate views: " << candidate_views_.size() << std::endl;
 
     // 打印被拒绝的候选视图数量
     rejected_candidate_views_ = planner.rejectedViews();
-    std::cout << "Number of rejected candidate views: " << rejected_candidate_views_.size() << std::endl;
+    // std::cout << "Number of rejected candidate views: " << rejected_candidate_views_.size() << std::endl;
 
     // 打印最佳视图索引
     goal_view_idx_ = planner.bestViewIndex();
-    std::cout << "Best view index: " << goal_view_idx_ << std::endl;
+    // std::cout << "Best view index: " << goal_view_idx_ << std::endl;
 
     const Path& goal_path_M = planner.bestPath();
     // 打印地图坐标系下的目标路径长度
-    std::cout << "Goal path length in map frame: " << goal_path_M.size() << std::endl;
+    // std::cout << "Goal path length in map frame: " << goal_path_M.size() << std::endl;
 
     // Add it to the goal path queue.
     for (const auto& T_MB : goal_path_M) {
@@ -189,8 +189,8 @@ Path ExplorationPlanner::computeNextPath_WB(const std::set<key_t>& frontiers,
                    [&](const Eigen::Matrix4f& T_MB) { return T_WM_ * T_MB; });
 
     // 打印世界坐标系下的目标路径长度
-    std::cout << "Goal path length in world frame: " << goal_path_W.size() << std::endl;
-    std::cout << "--------------------------函数computeNextPath_WB----------------------------" << std::endl;
+    // std::cout << "Goal path length in world frame: " << goal_path_W.size() << std::endl;
+    // std::cout << "--------------------------函数computeNextPath_WB----------------------------" << std::endl;
     return goal_path_W;
 }
 

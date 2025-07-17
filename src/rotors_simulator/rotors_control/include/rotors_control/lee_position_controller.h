@@ -61,7 +61,11 @@ class LeePositionController {
   void InitializeParameters();
   void CalculateRotorVelocities(Eigen::VectorXd* rotor_velocities) const;
 
-  void SetOdometry(const EigenOdometry& odometry);
+  void SetOdometry(const EigenOdometry& odometry);  
+  // 添加获取里程计信息的方法
+  const EigenOdometry& GetOdometry() const {
+    return odometry_;
+  }
   void SetTrajectoryPoint(
     const mav_msgs::EigenTrajectoryPoint& command_trajectory);
 

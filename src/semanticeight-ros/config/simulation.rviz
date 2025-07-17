@@ -3,7 +3,8 @@ Panels:
     Help Height: 138
     Name: Displays
     Property Tree Widget:
-      Expanded: ~
+      Expanded:
+        - /TF1
       Splitter Ratio: 0.5
     Tree Height: 841
   - Class: rviz/Selection
@@ -23,7 +24,7 @@ Panels:
   - Class: rviz/Time
     Name: Time
     SyncMode: 0
-    SyncSource: Input Depth
+    SyncSource: ""
 Preferences:
   PromptSaveOnExit: true
 Toolbars:
@@ -36,7 +37,7 @@ Visualization Manager:
       Marker Topic: /supereight/planner/candidates
       Name: Candidates
       Namespaces:
-        rejected: false
+        {}
       Queue Size: 100
       Value: true
     - Class: rviz/Marker
@@ -44,10 +45,7 @@ Visualization Manager:
       Marker Topic: /supereight/planner/goal
       Name: Goal
       Namespaces:
-        frustum: false
-        path: true
-        poses: true
-        rays: false
+        {}
       Queue Size: 100
       Value: true
     - Class: rviz/Marker
@@ -55,7 +53,7 @@ Visualization Manager:
       Marker Topic: /supereight/map/frontiers
       Name: Frontiers
       Namespaces:
-        frontiers: true
+        {}
       Queue Size: 100
       Value: true
     - Class: rviz/Marker
@@ -79,10 +77,7 @@ Visualization Manager:
       Marker Topic: /supereight/map
       Name: Map
       Namespaces:
-        dim: true
-        free_voxels: false
-        mesh: true
-        occupied_voxels: false
+        {}
       Queue Size: 100
       Value: true
     - Class: rviz/Marker
@@ -234,12 +229,36 @@ Visualization Manager:
         All Enabled: false
         firefly/base_link:
           Value: true
+        firefly/base_link_inertia:
+          Value: true
         firefly/odometry_sensor1:
           Value: false
+        firefly/rotor_0:
+          Value: true
+        firefly/rotor_1:
+          Value: true
+        firefly/rotor_2:
+          Value: true
+        firefly/rotor_3:
+          Value: true
+        firefly/rotor_4:
+          Value: true
+        firefly/rotor_5:
+          Value: true
         firefly/vi_sensor/base_link:
           Value: false
+        firefly/vi_sensor/camera_depth_link:
+          Value: true
         firefly/vi_sensor/camera_depth_optical_center_link:
           Value: false
+        firefly/vi_sensor/camera_left_link:
+          Value: true
+        firefly/vi_sensor/camera_left_optical_link:
+          Value: true
+        firefly/vi_sensor/camera_right_link:
+          Value: true
+        firefly/vi_sensor/vi_sensor_link:
+          Value: true
         map:
           Value: false
         world:
@@ -249,12 +268,33 @@ Visualization Manager:
       Name: TF
       Show Arrows: true
       Show Axes: true
-      Show Names: true
+      Show Names: false
       Tree:
         world:
           firefly/base_link:
-            firefly/vi_sensor/camera_depth_optical_center_link:
+            firefly/base_link_inertia:
               {}
+            firefly/rotor_0:
+              {}
+            firefly/rotor_1:
+              {}
+            firefly/rotor_2:
+              {}
+            firefly/rotor_3:
+              {}
+            firefly/rotor_4:
+              {}
+            firefly/rotor_5:
+              {}
+            firefly/vi_sensor/vi_sensor_link:
+              firefly/vi_sensor/camera_depth_link:
+                firefly/vi_sensor/camera_depth_optical_center_link:
+                  {}
+              firefly/vi_sensor/camera_left_link:
+                firefly/vi_sensor/camera_left_optical_link:
+                  {}
+              firefly/vi_sensor/camera_right_link:
+                {}
           firefly/odometry_sensor1:
             {}
           firefly/vi_sensor/base_link:
@@ -391,5 +431,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 3840
-  X: 0
-  Y: 764
+  X: 285
+  Y: 587

@@ -356,6 +356,8 @@ SupereightNode::SupereightNode(const ros::NodeHandle& nh, const ros::NodeHandle&
             mav_msgs::msgMultiDofJointTrajectoryPointFromEigen(point, &point_msg);
             path_msg.points.push_back(point_msg);
             path_pub_.publish(path_msg);
+            //打印path_msg
+            ROS_INFO("path_msg: %s", path_msg.header.frame_id.c_str());
         }
     }
     else if (node_config_.dataset == Dataset::Gazebo
@@ -1086,8 +1088,7 @@ void SupereightNode::plan()
             fused_at_goal_ = false;
             visualizeCandidates(0.25f);
             visualizeGoal(0.25f);
-            //planner_->needsNewGoal()
-            if (1) {
+            if (planner_->needsNewGoal()) {
                 stats_.newFrame("planning");
 
                 Eigen::Matrix4f planning_T_WC;
@@ -1239,6 +1240,10 @@ void SupereightNode::plan()
                                        world_frame_id_,
                                        node_config_.dataset,
                                        supereight_config_.delta_t);
+                // publish_pose_open_loop(*planner_,
+                //                        pose_pub_,
+                //                        world_frame_id_,
+                //                        supereight_config_.delta_t);
 
             }
             else if (node_config_.control_interface == ControlInterface::SRL) {
@@ -1512,6 +1517,7 @@ void SupereightNode::setupRos()
     // Initialise the reference publisher depending on the simulator and controller used
     if (node_config_.control_interface == ControlInterface::RotorS) {
         path_pub_ = nh_.advertise<trajectory_msgs::MultiDOFJointTrajectory>("/supereight/path", 2);
+        pose_pub_ = nh_.advertise<geometry_msgs::PoseStamped>("/supereight/pose_control", 2);
     }
     else if (node_config_.control_interface == ControlInterface::SRL) {
         path_pub_ = nh_.advertise<mav_interface_msgs::FullStateTrajectory>("/supereight/path", 2);

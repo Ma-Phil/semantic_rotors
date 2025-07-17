@@ -132,8 +132,12 @@ trajectory_msgs::MultiDOFJointTrajectory pose_to_traj_msg(const Eigen::Matrix4f&
 
 
 
+// trajectory_msgs::MultiDOFJointTrajectory path_to_traj_msg(const se::Path& path_WB,
+//                                                           const std_msgs::Header& header);
 trajectory_msgs::MultiDOFJointTrajectory path_to_traj_msg(const se::Path& path_WB,
-                                                          const std_msgs::Header& header);
+                                                          const std_msgs::Header& header,
+                                                          const float linear_velocity = 1.0f,
+                                                          const float angular_velocity = 1.0f);
 
 
 
@@ -227,6 +231,11 @@ void publish_path_open_loop(se::ExplorationPlanner& planner,
                             const ros::Publisher& path_pub,
                             const std::string& world_frame_id,
                             Dataset dataset,
+                            float delta_t);
+
+void publish_pose_open_loop(se::ExplorationPlanner& planner,
+                            const ros::Publisher& pose_pub,
+                            const std::string& world_frame_id,
                             float delta_t);
 
 void publish_full_state_trajectory(se::ExplorationPlanner& planner,

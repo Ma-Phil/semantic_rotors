@@ -231,32 +231,87 @@ nav_msgs::Path path_to_path_msg(const se::Path& path_WB, const std_msgs::Header&
 
 
 trajectory_msgs::MultiDOFJointTrajectory pose_to_traj_msg(const Eigen::Matrix4f& T_WB,
-                                                          const std_msgs::Header& header)
+                                                          const std_msgs::Header& header,
+                                                          const float linear_velocity = 1.0f,
+                                                          const float angular_velocity = 1.0f)
 {
     se::Path path;
     path.push_back(T_WB);
-    return path_to_traj_msg(path, header);
+    return path_to_traj_msg(path, header, linear_velocity, angular_velocity);
 }
 
 
 
 trajectory_msgs::MultiDOFJointTrajectory path_to_traj_msg(const se::Path& path_WB,
-                                                          const std_msgs::Header& header)
+                                                          const std_msgs::Header& header,
+                                                          const float linear_velocity,
+                                                          const float angular_velocity)
 {
     trajectory_msgs::MultiDOFJointTrajectory path_msg;
     path_msg.header = header;
     path_msg.joint_names.emplace_back("MAV_body");
     path_msg.points.reserve(path_WB.size());
+
+    ros::Duration cumulative_time(0.0);
+    // 打印path_WB.size()
+    std::cout << "path_WB.size() = " << path_WB.size() << std::endl;
+
     for (size_t i = 0; i < path_WB.size(); ++i) {
         trajectory_msgs::MultiDOFJointTrajectoryPoint point_msg;
         point_msg.transforms.push_back(eigen_to_transform(path_WB[i]));
         // Take the constant tracking error of the controller into account
         point_msg.transforms.front().translation.z += 0.2;
+
+        // 计算速度和加速度
+        if (i > 0) {
+            const Eigen::Matrix4f prev_T_WB = path_WB[i - 1];
+            const Eigen::Matrix4f curr_T_WB = path_WB[i];
+
+            // 计算位置差
+            const Eigen::Vector3f prev_pos = prev_T_WB.topRightCorner<3, 1>();
+            const Eigen::Vector3f curr_pos = curr_T_WB.topRightCorner<3, 1>();
+            const float dist = (curr_pos - prev_pos).norm();
+
+            // 计算姿态差
+            const Eigen::Quaternionf prev_rot(prev_T_WB.topLeftCorner<3, 3>());
+            const Eigen::Quaternionf curr_rot(curr_T_WB.topLeftCorner<3, 3>());
+            const float angle = prev_rot.angularDistance(curr_rot);
+
+            // 计算所需时间
+            const float time_required = std::max(dist / linear_velocity, angle / angular_velocity);
+
+            // 计算线速度和角速度
+            const Eigen::Vector3f linear_vel = (curr_pos - prev_pos) / time_required;
+            // 手动计算角速度
+            const Eigen::Quaternionf delta_q = curr_rot * prev_rot.inverse();
+            const Eigen::AngleAxisf delta_aa(delta_q);
+            const Eigen::Vector3f angular_vel = delta_aa.axis() * delta_aa.angle() / time_required;
+
+            // 设置速度
+            geometry_msgs::Twist twist;
+            twist.linear.x = linear_vel.x();
+            twist.linear.y = linear_vel.y();
+            twist.linear.z = linear_vel.z();
+            twist.angular.x = angular_vel.x();
+            twist.angular.y = angular_vel.y();
+            twist.angular.z = angular_vel.z();
+            point_msg.velocities.push_back(twist);
+
+            // 简单假设加速度为 0
+            geometry_msgs::Twist accel;
+            point_msg.accelerations.push_back(accel);
+
+            // 累加时间
+            cumulative_time += ros::Duration(time_required);
+        }
+
+        // 设置时间
+        point_msg.time_from_start = cumulative_time;
+
         path_msg.points.push_back(point_msg);
     }
     return path_msg;
 }
-
 
 Eigen::Matrix4f interpolate_pose(const geometry_msgs::TransformStamped& prev_pose,
                                  const geometry_msgs::TransformStamped& next_pose,
@@ -382,7 +437,8 @@ void publish_path_vertex(const se::ExplorationPlanner& planner,
         header.stamp = ros::Time::now();
         header.frame_id = world_frame_id;
         if (dataset == Dataset::Gazebo) {
-            path_pub.publish(pose_to_traj_msg(T_WB, header));
+            // 明确传递速度参数
+            path_pub.publish(pose_to_traj_msg(T_WB, header, 1.0f, 1.0f));
         }
         else {
             path_pub.publish(pose_to_path_msg(T_WB, header));
@@ -406,14 +462,15 @@ void publish_path_open_loop(se::ExplorationPlanner& planner,
         header.stamp = ros::Time::now();
         header.frame_id = world_frame_id;
         if (dataset == Dataset::Gazebo) {
-            path_pub.publish(pose_to_traj_msg(T_WB, header));
+            // 明确传递速度参数
+            path_pub.publish(pose_to_traj_msg(T_WB, header, 1.0f, 1.0f));
             // 打印进行了第n个rotors路径发布
-            ROS_INFO("Published %dth rotors path", path_n);
+            // ROS_INFO("Published %dth rotors path", path_n);
             path_n++;
         }
         else {
             // 打印进行了第n个路径发布
-            ROS_INFO("Published %dth path", path_m);
+            // ROS_INFO("Published %dth path", path_m);
             path_m++;
             path_pub.publish(pose_to_path_msg(T_WB, header));
         }
@@ -422,6 +479,39 @@ void publish_path_open_loop(se::ExplorationPlanner& planner,
         std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>(1000.0f * delta_t)));
     }
     std::this_thread::sleep_for(std::chrono::seconds(1));
+}
+
+void publish_pose_open_loop(se::ExplorationPlanner& planner,
+                            const ros::Publisher& pose_pub,
+                            const std::string& world_frame_id,
+                            float delta_t)
+{
+    Eigen::Matrix4f T_WB;
+    while (planner.goalT_WB(T_WB)) {
+        planner.popGoalT_WB();
+        std_msgs::Header header;
+        header.stamp = ros::Time::now();
+        header.frame_id = world_frame_id;
+
+        // 将 T_WB 转换为 geometry_msgs::PoseStamped 消息
+        geometry_msgs::PoseStamped pose_msg;
+        pose_msg.header = header;
+        const Eigen::Vector3f t_WB = T_WB.topRightCorner<3, 1>();
+        const Eigen::Quaternionf q_WB(T_WB.topLeftCorner<3, 3>());
+        pose_msg.pose.position.x = t_WB.x();
+        pose_msg.pose.position.y = t_WB.y();
+        pose_msg.pose.position.z = t_WB.z();
+        pose_msg.pose.orientation.x = q_WB.x();
+        pose_msg.pose.orientation.y = q_WB.y();
+        pose_msg.pose.orientation.z = q_WB.z();
+        pose_msg.pose.orientation.w = q_WB.w();
+
+        // 发布 pose 消息
+        pose_pub.publish(pose_msg);
+
+        // 等待 delta_t 时间
+        std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>(1000.0f * delta_t)));
+    }
 }
 
 double computePositionError(const Eigen::Vector3d& r_WB_1, const Eigen::Vector3d& r_WB_2)

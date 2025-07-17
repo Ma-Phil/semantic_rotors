@@ -101,7 +101,7 @@ void LeePositionControllerNode::Publish() {
 void LeePositionControllerNode::CommandPoseCallback(
     const geometry_msgs::PoseStampedConstPtr& pose_msg) {
       //打印进行了命令回调
-  ROS_INFO("LeePositionControllerNode CommandPoseCallback");
+  ROS_INFO_ONCE("LeePositionControllerNode CommandPoseCallback");
   // Clear all pending commands.
   command_timer_.stop();
   commands_.clear();
@@ -118,7 +118,7 @@ void LeePositionControllerNode::CommandPoseCallback(
 void LeePositionControllerNode::MultiDofJointTrajectoryCallback(
     const trajectory_msgs::MultiDOFJointTrajectoryConstPtr& msg) {
       //打印进行了回调
-  ROS_INFO("LeePositionControllerNode MultiDofJointTrajectoryCallback");
+  ROS_INFO_ONCE("LeePositionControllerNode MultiDofJointTrajectoryCallback");
   // Clear all pending commands.
   command_timer_.stop();
   commands_.clear();
@@ -144,10 +144,19 @@ void LeePositionControllerNode::MultiDofJointTrajectoryCallback(
 
     mav_msgs::eigenTrajectoryPointFromMsg(current_reference, &eigen_reference);
 
-    commands_.push_back(eigen_reference);
-    // command_waiting_times_.push_back(current_reference.time_from_start - reference_before.time_from_start);
+    // commands_.push_back(eigen_reference);
+    command_waiting_times_.push_back(current_reference.time_from_start - reference_before.time_from_start);
     command_waiting_times_.push_back(fixed_time_interval);
   }
+
+  // if (!commands_.empty()) {
+  //   const EigenOdometry& current_odometry = lee_position_controller_.GetOdometry();
+  //   ROS_INFO("LeePos TrajCall, target point: %f, %f, %f, current odom: %f, %f, %f", 
+  //            commands_.front().position_W.x(), commands_.front().position_W.y(), commands_.front().position_W.z(),
+  //            current_odometry.position.x(), current_odometry.position.y(), current_odometry.position.z());
+  // } else {
+  //   ROS_WARN("Commands is empty, cannot get target point.");
+  // }
 
   // We can trigger the first command immediately.
   lee_position_controller_.SetTrajectoryPoint(commands_.front());
@@ -158,13 +167,7 @@ void LeePositionControllerNode::MultiDofJointTrajectoryCallback(
     command_waiting_times_.pop_front();
     command_timer_.start();
   }
-    // Print whether the path is executed successfully and what the target point is
-  // Bug fix: Remove parentheses after position_W
-  if (!commands_.empty()) {
-    ROS_INFO("LeePos TrajCall, target point: %f, %f, %f", commands_.front().position_W.x(), commands_.front().position_W.y(), commands_.front().position_W.z());
-  } else {
-    ROS_WARN("Commands is empty, cannot get target point.");
-  }
+
 }
 
 void LeePositionControllerNode::TimedCommandCallback(const ros::TimerEvent& e) {
