@@ -4,7 +4,7 @@ devel/
 install/
 
 # 自动生成代码（保留 .msg/.srv 定义）
-**/msg/*.msg
+# **/msg/*.msg
 **/srv/*.srv
 **/action/*.action
 
