@@ -188,9 +188,12 @@ Path ExplorationPlanner::computeNextPath_WB(const std::set<key_t>& frontiers,
                    goal_path_W.begin(),
                    [&](const Eigen::Matrix4f& T_MB) { return T_WM_ * T_MB; });
 
-    // 打印世界坐标系下的目标路径长度
-    // std::cout << "Goal path length in world frame: " << goal_path_W.size() << std::endl;
-    // std::cout << "--------------------------函数computeNextPath_WB----------------------------" << std::endl;
+    // // 将 goal_path_W 中所有位姿的平移部分设置为 (0, 0, 0.3)
+    // for (auto& T_WB : goal_path_W) {
+    //     T_WB.topRightCorner<3, 1>() = Eigen::Vector3f(0.0f, 0.0f, 0.3f);
+    // }
+    // //打印设置了坐标，调用了该函数
+    // std::cout << "ExplorationPlanner::computeNextPath_WB  set goal_path_W (0.0f, 0.0f, 0.3f)" << std::endl;
     return goal_path_W;
 }
 

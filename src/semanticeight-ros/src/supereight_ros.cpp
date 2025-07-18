@@ -1108,6 +1108,10 @@ void SupereightNode::plan()
                     pipeline_->getFrontiers(), pipeline_->getObjectMaps(), planning_T_WB);
                 //打印进行了路径规划
                 ROS_INFO("Planning path size: %zu", path_WB.size());
+                //打印出path_WB的值
+                for (const auto& T_WB : path_WB) {
+                    std::cout << "T_WB: " << T_WB.transpose() << std::endl;
+                }
                 const auto end_time = std::chrono::steady_clock::now();
                 stats_.sample("planning",
                               "Planning time",

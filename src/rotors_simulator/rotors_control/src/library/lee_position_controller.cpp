@@ -53,12 +53,16 @@ void LeePositionController::InitializeParameters() {
 }
 
 void LeePositionController::CalculateRotorVelocities(Eigen::VectorXd* rotor_velocities) const {
+  //打印调用了该函数
+  // std::cout << "LeePositionController::CalculateRotorVelocities" << std::endl;
   assert(rotor_velocities);
   assert(initialized_params_);
 
   rotor_velocities->resize(vehicle_parameters_.rotor_configuration_.rotors.size());
   // Return 0 velocities on all rotors, until the first command is received.
   if (!controller_active_) {
+    //打印controller_active_
+    std::cout << "controller_active_: " << controller_active_ << std::endl;
     *rotor_velocities = Eigen::VectorXd::Zero(rotor_velocities->rows());
     return;
   }
@@ -89,6 +93,8 @@ void LeePositionController::SetTrajectoryPoint(
     const mav_msgs::EigenTrajectoryPoint& command_trajectory) {
   command_trajectory_ = command_trajectory;
   controller_active_ = true;
+  //打印command_trajectory_
+  std::cout << "command_trajectory_: " << command_trajectory_.position_W.transpose() << std::endl;
 }
 
 void LeePositionController::ComputeDesiredAcceleration(Eigen::Vector3d* acceleration) const {
@@ -96,6 +102,12 @@ void LeePositionController::ComputeDesiredAcceleration(Eigen::Vector3d* accelera
 
   Eigen::Vector3d position_error;
   position_error = odometry_.position - command_trajectory_.position_W;
+  // //打印odom
+  // std::cout << "odometry_.position: " << odometry_.position.transpose() << std::endl;
+  // //打印command
+  // std::cout << "command_trajectory_.position_W: " << command_trajectory_.position_W.transpose() << std::endl;
+  // //打印position_error
+  // std::cout << "position_error: " << position_error.transpose() << std::endl;
 
   // Transform velocity to world frame.
   const Eigen::Matrix3d R_W_I = odometry_.orientation.toRotationMatrix();

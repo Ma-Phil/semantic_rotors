@@ -38,6 +38,11 @@ Eigen::Vector3f sample_random_frontier(const se::Octree<VoxelImpl::VoxelType>& m
     Eigen::Vector3f pos_M = map.voxelDim()
         * (keyops::decode(code).cast<float>() + Eigen::Vector3f::Constant(size / 2.0f));
     math::clamp(pos_M, sampling_min_M, sampling_max_M);
+
+    // // 临时将 pos_M 设置为固定坐标 (0, 0, 0.3)
+    // pos_M = Eigen::Vector3f(0.0f, 0.0f, 0.3f);
+    // //并打印调用了该函数
+    // std::cout << "sample_random_frontier" << std::endl;
     return pos_M;
 }
 
@@ -279,9 +284,13 @@ SinglePathExplorationPlanner::sampleCandidate(const se::Octree<VoxelImpl::VoxelT
         return Eigen::Vector3f::Constant(NAN);
     }
     else if (objects.empty() || distribution(generator) < frontier_sampling_prob) {
+        //打印分支
+        // std::cout << "sample_random_frontier" << std::endl;
         return sample_random_frontier(map, frontiers, sampling_min_M, sampling_max_M);
     }
     else {
+        //打印分支
+        // std::cout << "sample_random_object" << std::endl;
         return sample_random_object(objects, sampling_min_M, sampling_max_M);
     }
 }

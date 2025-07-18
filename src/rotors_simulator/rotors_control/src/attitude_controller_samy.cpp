@@ -84,6 +84,8 @@ void AttitudeControllerSamy::InitializeParams() {
 }
 
 void AttitudeControllerSamy::CalculateRotorVelocities(Eigen::VectorXd* rotor_velocities) const {
+  //打印调用了该函数
+  // std::cout << "AttitudeControllerSamy::CalculateRotorVelocities" << std::endl;
   assert(rotor_velocities);
   assert(initialized_params_);
 

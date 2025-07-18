@@ -22,8 +22,8 @@ def publish_hover_command():
         # 设置悬停位置，x=0, y=0, z=1
         transform1 = Transform()
         transform1.translation.x = 0.0
-        transform1.translation.y = -2.0
-        transform1.translation.z = 1.0
+        transform1.translation.y = -3.8
+        transform1.translation.z = 0.3
         # 设置姿态，无旋转
         transform1.rotation = Quaternion(0.0, 0.0, 0.0, 1.0)
         hover_point1.transforms = [transform1]
