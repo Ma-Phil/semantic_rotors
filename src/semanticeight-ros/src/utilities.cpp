@@ -256,59 +256,82 @@ trajectory_msgs::MultiDOFJointTrajectory path_to_traj_msg(const se::Path& path_W
     // 打印path_WB.size()
     std::cout << "path_WB.size() = " << path_WB.size() << std::endl;
 
-    for (size_t i = 0; i < path_WB.size(); ++i) {
-        trajectory_msgs::MultiDOFJointTrajectoryPoint point_msg;
-        point_msg.transforms.push_back(eigen_to_transform(path_WB[i]));
-        // Take the constant tracking error of the controller into account
-        point_msg.transforms.front().translation.z += 0.2;
+    if (path_WB.size() == 1) {
+        // 模拟第二个点
+        const Eigen::Matrix4f& T_WB = path_WB[0];
+        // 第一个点
+        trajectory_msgs::MultiDOFJointTrajectoryPoint point_msg1;
+        point_msg1.transforms.push_back(eigen_to_transform(T_WB));
+        point_msg1.transforms.front().translation.z += 0.2;
+        point_msg1.velocities.push_back(geometry_msgs::Twist());
+        point_msg1.accelerations.push_back(geometry_msgs::Twist());
+        point_msg1.time_from_start = cumulative_time;
+        path_msg.points.push_back(point_msg1);
 
-        // 计算速度和加速度
-        if (i > 0) {
-            const Eigen::Matrix4f prev_T_WB = path_WB[i - 1];
-            const Eigen::Matrix4f curr_T_WB = path_WB[i];
+        // 第二个点，位置相同，时间延迟 1 秒
+        trajectory_msgs::MultiDOFJointTrajectoryPoint point_msg2;
+        point_msg2.transforms.push_back(eigen_to_transform(T_WB));
+        point_msg2.transforms.front().translation.z += 0.2;
+        point_msg2.velocities.push_back(geometry_msgs::Twist());
+        point_msg2.accelerations.push_back(geometry_msgs::Twist());
+        cumulative_time += ros::Duration(1.0);
+        point_msg2.time_from_start = cumulative_time;
+        path_msg.points.push_back(point_msg2);
+    } else {
+        for (size_t i = 0; i < path_WB.size(); ++i) {
+            trajectory_msgs::MultiDOFJointTrajectoryPoint point_msg;
+            point_msg.transforms.push_back(eigen_to_transform(path_WB[i]));
+            // Take the constant tracking error of the controller into account
+            point_msg.transforms.front().translation.z += 0.2;
 
-            // 计算位置差
-            const Eigen::Vector3f prev_pos = prev_T_WB.topRightCorner<3, 1>();
-            const Eigen::Vector3f curr_pos = curr_T_WB.topRightCorner<3, 1>();
-            const float dist = (curr_pos - prev_pos).norm();
+            // 计算速度和加速度
+            if (i > 0) {
+                const Eigen::Matrix4f prev_T_WB = path_WB[i - 1];
+                const Eigen::Matrix4f curr_T_WB = path_WB[i];
 
-            // 计算姿态差
-            const Eigen::Quaternionf prev_rot(prev_T_WB.topLeftCorner<3, 3>());
-            const Eigen::Quaternionf curr_rot(curr_T_WB.topLeftCorner<3, 3>());
-            const float angle = prev_rot.angularDistance(curr_rot);
+                // 计算位置差
+                const Eigen::Vector3f prev_pos = prev_T_WB.topRightCorner<3, 1>();
+                const Eigen::Vector3f curr_pos = curr_T_WB.topRightCorner<3, 1>();
+                const float dist = (curr_pos - prev_pos).norm();
 
-            // 计算所需时间
-            const float time_required = std::max(dist / linear_velocity, angle / angular_velocity);
+                // 计算姿态差
+                const Eigen::Quaternionf prev_rot(prev_T_WB.topLeftCorner<3, 3>());
+                const Eigen::Quaternionf curr_rot(curr_T_WB.topLeftCorner<3, 3>());
+                const float angle = prev_rot.angularDistance(curr_rot);
 
-            // 计算线速度和角速度
-            const Eigen::Vector3f linear_vel = (curr_pos - prev_pos) / time_required;
-            // 手动计算角速度
-            const Eigen::Quaternionf delta_q = curr_rot * prev_rot.inverse();
-            const Eigen::AngleAxisf delta_aa(delta_q);
-            const Eigen::Vector3f angular_vel = delta_aa.axis() * delta_aa.angle() / time_required;
+                // 计算所需时间
+                const float time_required = std::max(dist / linear_velocity, angle / angular_velocity);
 
-            // 设置速度
-            geometry_msgs::Twist twist;
-            twist.linear.x = linear_vel.x();
-            twist.linear.y = linear_vel.y();
-            twist.linear.z = linear_vel.z();
-            twist.angular.x = angular_vel.x();
-            twist.angular.y = angular_vel.y();
-            twist.angular.z = angular_vel.z();
-            point_msg.velocities.push_back(twist);
+                // 计算线速度和角速度
+                const Eigen::Vector3f linear_vel = (curr_pos - prev_pos) / time_required;
+                // 手动计算角速度
+                const Eigen::Quaternionf delta_q = curr_rot * prev_rot.inverse();
+                const Eigen::AngleAxisf delta_aa(delta_q);
+                const Eigen::Vector3f angular_vel = delta_aa.axis() * delta_aa.angle() / time_required;
 
-            // 简单假设加速度为 0
-            geometry_msgs::Twist accel;
-            point_msg.accelerations.push_back(accel);
+                // 设置速度
+                geometry_msgs::Twist twist;
+                twist.linear.x = linear_vel.x();
+                twist.linear.y = linear_vel.y();
+                twist.linear.z = linear_vel.z();
+                twist.angular.x = angular_vel.x();
+                twist.angular.y = angular_vel.y();
+                twist.angular.z = angular_vel.z();
+                point_msg.velocities.push_back(twist);
 
-            // 累加时间
-            cumulative_time += ros::Duration(time_required);
+                // 简单假设加速度为 0
+                geometry_msgs::Twist accel;
+                point_msg.accelerations.push_back(accel);
+
+                // 累加时间
+                cumulative_time += ros::Duration(time_required);
+            }
+
+            // 设置时间
+            point_msg.time_from_start = cumulative_time;
+
+            path_msg.points.push_back(point_msg);
         }
-
-        // 设置时间
-        point_msg.time_from_start = cumulative_time;
-
-        path_msg.points.push_back(point_msg);
     }
     return path_msg;
 }
