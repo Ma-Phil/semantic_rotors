@@ -77,8 +77,9 @@
     <rosparam command="load" file="$(find rotors_gazebo)/resource/lee_controller_$(arg mav_name).yaml" />
     <rosparam command="load" file="$(find rotors_gazebo)/resource/$(arg mav_name).yaml" />
     <!-- <remap from="odometry" to="/firefly/ground_truth/odometry" /> -->
-    <remap from="command/trajectory" to="/supereight/path" />
+    <remap from="command/trajectory" to="/supereight/path/hover" />
     <remap from="command/pose" to="/supereight/pose_control" />
+    <!-- <remap from="command/pose" to="/command/pose/hover" /> -->
     <remap from="odometry" to="odometry_sensor1/odometry" />
   </node>
   

@@ -62,7 +62,7 @@ void LeePositionController::CalculateRotorVelocities(Eigen::VectorXd* rotor_velo
   // Return 0 velocities on all rotors, until the first command is received.
   if (!controller_active_) {
     //打印controller_active_
-    std::cout << "controller_active_: " << controller_active_ << std::endl;
+    // std::cout << "controller_active_: " << controller_active_ << std::endl;
     *rotor_velocities = Eigen::VectorXd::Zero(rotor_velocities->rows());
     return;
   }

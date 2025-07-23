@@ -1110,7 +1110,7 @@ void SupereightNode::plan()
                 ROS_INFO("Planning path size: %zu", path_WB.size());
                 //打印出path_WB的值
                 for (const auto& T_WB : path_WB) {
-                    std::cout << "T_WB: " << T_WB.transpose() << std::endl;
+                    std::cout << std::endl << "T_WB in plan: " << T_WB.transpose() << std::endl<< std::endl;
                 }
                 const auto end_time = std::chrono::steady_clock::now();
                 stats_.sample("planning",
@@ -1240,7 +1240,7 @@ void SupereightNode::plan()
             // Change the path publishing method depending on the dataset type.
             if (node_config_.control_interface == ControlInterface::RotorS) {
                 publish_path_open_loop(*planner_,
-                                       path_pub_,
+                                       pose_pub_,
                                        world_frame_id_,
                                        node_config_.dataset,
                                        supereight_config_.delta_t);

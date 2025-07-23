@@ -18,7 +18,7 @@ def publish_command_pose():
 
         # 设置位置，x=0, y=0, z=1
         pose_msg.pose.position.x = 0.0
-        pose_msg.pose.position.y = 2.0
+        pose_msg.pose.position.y = 0.0
         pose_msg.pose.position.z = 1.0
 
         # 设置姿态，无旋转

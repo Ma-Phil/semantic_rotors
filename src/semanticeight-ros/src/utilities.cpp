@@ -470,7 +470,7 @@ void publish_path_vertex(const se::ExplorationPlanner& planner,
 }
 
 void publish_path_open_loop(se::ExplorationPlanner& planner,
-                            const ros::Publisher& path_pub,
+                            const ros::Publisher& cmd_pose_pub, // 新增发布者
                             const std::string& world_frame_id,
                             Dataset dataset,
                             float delta_t)
@@ -484,9 +484,34 @@ void publish_path_open_loop(se::ExplorationPlanner& planner,
         std_msgs::Header header;
         header.stamp = ros::Time::now();
         header.frame_id = world_frame_id;
+
         if (dataset == Dataset::Gazebo) {
+            // //将4*4的T_WB设置为固定值，用于测试
+            // T_WB << 0, 0, 1, 0,
+            //         0, 1, 0, 0,
+            //         1, 0, 0, 0,
+            //         0, 0, 0, 1;
+            // //打印T_WB
+            // std::cout << std::endl << "T_WB in publish_path_open_loop: " << T_WB.transpose() << std::endl << std::endl;
             // 明确传递速度参数
-            path_pub.publish(pose_to_traj_msg(T_WB, header, 1.0f, 1.0f));
+            // path_pub.publish(pose_to_traj_msg(T_WB, header, 1.0f, 1.0f));
+
+            // 将 T_WB 转换为 geometry_msgs::PoseStamped 消息
+            geometry_msgs::PoseStamped pose_msg;
+            pose_msg.header = header;
+            const Eigen::Vector3f t_WB = T_WB.topRightCorner<3, 1>();
+            const Eigen::Quaternionf q_WB(T_WB.topLeftCorner<3, 3>());
+            pose_msg.pose.position.x = t_WB.x();
+            pose_msg.pose.position.y = t_WB.y();
+            pose_msg.pose.position.z = t_WB.z();
+            pose_msg.pose.orientation.x = q_WB.x();
+            pose_msg.pose.orientation.y = q_WB.y();
+            pose_msg.pose.orientation.z = q_WB.z();
+            pose_msg.pose.orientation.w = q_WB.w();
+
+            // 发布 pose 消息
+            cmd_pose_pub.publish(pose_msg);
+
             // 打印进行了第n个rotors路径发布
             // ROS_INFO("Published %dth rotors path", path_n);
             path_n++;
@@ -495,7 +520,7 @@ void publish_path_open_loop(se::ExplorationPlanner& planner,
             // 打印进行了第n个路径发布
             // ROS_INFO("Published %dth path", path_m);
             path_m++;
-            path_pub.publish(pose_to_path_msg(T_WB, header));
+            // path_pub.publish(pose_to_path_msg(T_WB, header));
         }
         Eigen::Vector3f t_WB = T_WB.topRightCorner<3, 1>();
         Eigen::Quaternionf q_WB(T_WB.topLeftCorner<3, 3>());
