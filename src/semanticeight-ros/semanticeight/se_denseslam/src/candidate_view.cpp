@@ -110,6 +110,8 @@ CandidateView::CandidateView(const se::Octree<VoxelImpl::VoxelType>& map,
         path_MB_.push_back(Eigen::Matrix4f::Identity());
         path_MB_.back().topRightCorner<3, 1>() = desired_t_MB_;
         status_ = "Rejected from pose history";
+        // 打印status_
+        std::cout << "status_: " << status_ << std::endl;
         return;
     }
     if (config_.planner_config.start_t_MB_.isApprox(config_.planner_config.goal_t_MB_)) {
@@ -117,18 +119,27 @@ CandidateView::CandidateView(const se::Octree<VoxelImpl::VoxelType>& map,
         path_MB_.push_back(T_MB);
         path_MB_.push_back(T_MB);
         status_ = "Same start/goal positions";
+        // 打印status_
+        std::cout << "status_: " << status_ << std::endl;
     }
     else {
         // Plan a path to the goal
         const auto status =
             planner.planPath(config_.planner_config.start_t_MB_, config_.planner_config.goal_t_MB_);
+            //打印起点与终点
+            // std::cout << "start_t_MB_: " << config_.planner_config.start_t_MB_.transpose() << std::endl;
+            // std::cout << "goal_t_MB_: " << config_.planner_config.goal_t_MB_.transpose() << std::endl;
         status_ = ptp::to_string(status);
         if (status != ptp::PlanningResult::Success && status != ptp::PlanningResult::Partial) {
             // Could not plan a path. Add the attempted goal point to the path for visualization
             path_MB_.push_back(Eigen::Matrix4f::Identity());
             path_MB_.back().topRightCorner<3, 1>() = config_.planner_config.goal_t_MB_;
+            // 打印路径规划失败
+            // std::cout << "Path planning failed"<< std::endl;
             return;
         }
+        // 打印路径规划成功
+        // std::cout << "Path planning success"<< std::endl;
         path_MB_ = convertPath(planner.getPath());
         // The first path vertex should have the same position as the current pose but a unit
         // orientation. Set it to exactly the current pose.
@@ -209,11 +220,15 @@ std::string CandidateView::utilityStr() const
 const Eigen::Matrix4f& CandidateView::goalT_MB() const
 {
     if (path_MB_.empty()) {
+        //打印if语句
+        std::cout << "path_MB_.empty()  --------------return invalid_T_MB;" << std::endl;
         static Eigen::Matrix4f invalid_T_MB = Eigen::Matrix4f::Identity();
         invalid_T_MB.topRightCorner<3, 1>() = Eigen::Vector3f::Constant(NAN);
         return invalid_T_MB;
     }
     else {
+        //打印if语句
+        // std::cout << "path_MB_.back()" << std::endl;
         return path_MB_.back();
     }
 }

@@ -39,10 +39,15 @@ Eigen::Vector3f sample_random_frontier(const se::Octree<VoxelImpl::VoxelType>& m
         * (keyops::decode(code).cast<float>() + Eigen::Vector3f::Constant(size / 2.0f));
     math::clamp(pos_M, sampling_min_M, sampling_max_M);
 
-    // // 临时将 pos_M 设置为固定坐标 (0, 0, 0.3)
-    // pos_M = Eigen::Vector3f(0.0f, 0.0f, 0.3f);
-    // //并打印调用了该函数
-    // std::cout << "sample_random_frontier" << std::endl;
+    // 临时将 pos_M 设置为固定坐标 (0, 0, 0.3)
+    // pos_M = Eigen::Vector3f(0.0f, 0.0f, 1.0f);
+    //并打印调用了该函数
+    // std::cout << "sample_random_frontier" << std::endl;  
+    // // 打印pos_M
+    // std::cout << "pos_M: " << pos_M.transpose() << std::endl;
+    // // 将pos_M除以10.0
+    // pos_M /= 10.0f;
+    // std::cout << "pos_M: " << pos_M.transpose() << std::endl;
     return pos_M;
 }
 
@@ -143,9 +148,14 @@ SinglePathExplorationPlanner::SinglePathExplorationPlanner(
                             sampling_min_M_reduced,
                             sampling_max_M_reduced,
                             config_.frontier_sampling_probability);
+        // 打印candidate_t_MB
+        // std::cout << "candidate_t_MB: " << candidate_t_MB.transpose() << std::endl;
+
         // Create the config for this particular candidate
         CandidateConfig candidate_config = config_.candidate_config;
         candidate_config.planner_config.goal_t_MB_ = candidate_t_MB;
+        // //打印candidate_t_MB
+        // std::cout << "candidate_t_MB: " << candidate_t_MB.transpose() << std::endl;
         // Create candidate and compute its utility
         candidates_.emplace_back(
             *map, planner, frontiers, objects, sensor, T_MB, T_BC, T_MB_history, candidate_config);

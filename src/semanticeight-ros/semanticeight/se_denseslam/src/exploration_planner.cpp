@@ -147,7 +147,9 @@ Path ExplorationPlanner::computeNextPath_WB(const std::set<key_t>& frontiers,
     // // 打印输入的前沿点数量
     // std::cout << "Number of frontiers: " << frontiers.size() << std::endl;
     // // 打印起始位姿
-    // std::cout << "Start T_WB:\n" << start_T_WB << std::endl;
+    std::cout << "Start T_WB:\n" << start_T_WB << std::endl;
+    //打印T_MW_
+    std::cout << "T_MW_:\n" << T_MW_ << std::endl;
 
     const std::vector<key_t> frontier_vec(frontiers.begin(), frontiers.end());
     const std::lock_guard<std::recursive_mutex> lock(mutex_);

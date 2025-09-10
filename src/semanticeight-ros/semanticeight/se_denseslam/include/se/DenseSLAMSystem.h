@@ -104,7 +104,7 @@ class DenseSLAMSystem {
     bool need_render_ = false;
 
     // Map
-    Eigen::Matrix4f T_MW_; // Constant world to map frame transformation
+    Eigen::Matrix4f T_MW_; // Constant world to map frame transformation 我去你妈的
     Eigen::Matrix4f T_WM_;
     std::vector<se::key_t> allocation_list_;
     std::shared_ptr<se::Octree<VoxelImpl::VoxelType>> map_;

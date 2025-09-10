@@ -69,7 +69,9 @@ SupereightNode::SupereightNode(const ros::NodeHandle& nh, const ros::NodeHandle&
 
     T_MW_ = Eigen::Matrix4f::Identity();
     T_MW_.topRightCorner<3, 1>() =
-        supereight_config_.t_MW_factor.cwiseProduct(supereight_config_.map_dim);
+        supereight_config_.t_MW_factor.cwiseProduct(supereight_config_.map_dim);// 服了
+    // 将 T_MW_ 的平移向量设为 (1, 1, 1)
+    // T_MW_.topRightCorner<3, 1>() = Eigen::Vector3f(1, 1, 1);
     T_WM_ = se::math::to_inverse_transformation(T_MW_);
     T_CB_ = supereight_config_.T_BC.inverse();
     init_t_WB_ = Eigen::Vector3f::Constant(NAN);

@@ -8,11 +8,11 @@
   <!-- Launch rviz. -->
   <arg name="rviz" default="true"/>
   <!-- Perform non-semantically-guided exploration as in ICRA 2020. -->
-  <arg name="classic" default="false"/>
+  <arg name="classic" default="true"/>
 
   <!-- Initial Waypoint sent to the autopilot. -->
   <arg name="waypoint_x" value="0.0"  if="$(eval world in ['apartment', 'maze'])"/>
-  <arg name="waypoint_y" value="-2.0" if="$(eval world in ['apartment', 'maze'])"/>
+  <arg name="waypoint_y" value="-4.0" if="$(eval world in ['apartment', 'maze'])"/>
   <arg name="waypoint_z" value="0.5"  if="$(eval world in ['apartment', 'maze'])"/>
   <arg name="waypoint_x" value="-2.0" if="$(eval world == 'powerplant')"/>
   <arg name="waypoint_y" value="0.0"  if="$(eval world == 'powerplant')"/>
@@ -77,8 +77,10 @@
     <rosparam command="load" file="$(find rotors_gazebo)/resource/lee_controller_$(arg mav_name).yaml" />
     <rosparam command="load" file="$(find rotors_gazebo)/resource/$(arg mav_name).yaml" />
     <!-- <remap from="odometry" to="/firefly/ground_truth/odometry" /> -->
-    <remap from="command/trajectory" to="/supereight/path/hover" />
+
+    <!-- <remap from="command/trajectory" to="/supereight/path/hover" /> -->
     <remap from="command/pose" to="/supereight/pose_control" />
+
     <!-- <remap from="command/pose" to="/command/pose/hover" /> -->
     <remap from="odometry" to="odometry_sensor1/odometry" />
   </node>

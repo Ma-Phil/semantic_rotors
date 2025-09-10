@@ -321,6 +321,11 @@ void SupereightNode::visualizeCandidates(float opacity)
     pose_marker.action = visualization_msgs::Marker::ADD;
     pose_marker.scale = make_vector3(0.5f, 0.05f, 0.05f);
     pose_marker.color = eigen_to_color(color_candidate_);
+    //改为红色
+    pose_marker.color.r = 1.0f;
+    pose_marker.color.g = 1.0f;
+    pose_marker.color.b = 0.0f;
+    pose_marker.color.a = 1.0f;
     if (opacity >= 0.0f) {
         pose_marker.color.a = opacity;
     }
@@ -478,6 +483,8 @@ void SupereightNode::visualizeGoal(float opacity)
 
     // Visualize the goal path as line strips.
     if (path.size() > 1) {
+        // 打印path.size()
+        std::cout << "path.size(): " << path.size() << std::endl;
         visualization_msgs::Marker path_marker;
         path_marker.header = header;
         path_marker.ns = "path";
@@ -486,7 +493,10 @@ void SupereightNode::visualizeGoal(float opacity)
         path_marker.action = visualization_msgs::Marker::ADD;
         path_marker.pose.orientation = make_quaternion();
         path_marker.scale.x = 0.05f;
-        path_marker.color = eigen_to_color(color_goal_);
+        path_marker.color = eigen_to_color(color_goal_);//改为红色
+        path_marker.color.r = 1.0f;
+        path_marker.color.g = 0.0f;
+        path_marker.color.b = 0.0f;
         if (opacity >= 0.0f) {
             path_marker.color.a = opacity;
         }

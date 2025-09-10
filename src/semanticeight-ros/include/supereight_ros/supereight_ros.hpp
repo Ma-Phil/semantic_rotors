@@ -328,13 +328,13 @@ class SupereightNode {
 
     // Visualization colors
     const Eigen::Vector4f color_occupied_ = Eigen::Vector4f(1.0, 1.0, 1.0, 1.0);
-    const Eigen::Vector4f color_free_ = Eigen::Vector4f(0.0, 1.0, 0.0, 0.5);
+    const Eigen::Vector4f color_free_ = Eigen::Vector4f(0.0, 1.0, 0.0, 0.05);
     const Eigen::Vector4f color_unknown_ = Eigen::Vector4f(0.0, 0.0, 0.0, 0.5);
     const Eigen::Vector4f color_object_ = Eigen::Vector4f(1.0, 0.0, 0.0, 1.0);
     const Eigen::Vector4f color_frontier_ = Eigen::Vector4f(1.0, 0.5, 0.0, 0.5);
-    const Eigen::Vector4f color_candidate_ = Eigen::Vector4f(1.0, 1.0, 0.0, 1.0);
-    const Eigen::Vector4f color_rejected_candidate_ = Eigen::Vector4f(1.0, 0.0, 0.0, 0.25);
-    const Eigen::Vector4f color_goal_ = Eigen::Vector4f(1.0, 0.0, 1.0, 1.0);
+    const Eigen::Vector4f color_candidate_ = Eigen::Vector4f(0.0, 0.0, 1.0, 0.5);
+    const Eigen::Vector4f color_rejected_candidate_ = Eigen::Vector4f(1.0, 0.0, 0.0, 1.0);
+    const Eigen::Vector4f color_goal_ = Eigen::Vector4f(1.0, 0.0, 0.0, 1.0);
     const Eigen::Vector4f color_mav_sphere_ = Eigen::Vector4f(0.0, 0.0, 1.0, 0.25);
     const Eigen::Vector4f color_pose_history_ = Eigen::Vector4f(0.5, 0.5, 0.5, 0.5);
     const Eigen::Vector4f color_sampling_aabb_ = Eigen::Vector4f(1.0, 0.0, 0.0, 0.5);
