@@ -126,9 +126,18 @@ CandidateView::CandidateView(const se::Octree<VoxelImpl::VoxelType>& map,
         // Plan a path to the goal
         const auto status =
             planner.planPath(config_.planner_config.start_t_MB_, config_.planner_config.goal_t_MB_);
-            //打印起点与终点
-            // std::cout << "start_t_MB_: " << config_.planner_config.start_t_MB_.transpose() << std::endl;
-            // std::cout << "goal_t_MB_: " << config_.planner_config.goal_t_MB_.transpose() << std::endl;
+            
+            // 定义T_MW_为以下4*4定值，其中平移变量为(25.6512, 25.6512, 25.6512):
+            //   1       0       0 25.6512
+            //   0       1       0 25.6512
+            //   0       0       1 25.6512
+            //   0       0       0       1
+            Eigen::Matrix4f T_MW_ = Eigen::Matrix4f::Identity();
+            T_MW_.block<3, 1>(0, 3) = Eigen::Vector3f(25.6512, 25.6512, 25.6512);
+            //打印起点与终点,左乘T_MW_的逆矩阵
+            std::cout << "start_t_WB_: " << (T_MW_.inverse() * config_.planner_config.start_t_MB_.homogeneous()).transpose() << std::endl;
+            std::cout << "goal_t_WB_: " << (T_MW_.inverse() * config_.planner_config.goal_t_MB_.homogeneous()).transpose() << std::endl;
+
         status_ = ptp::to_string(status);
         if (status != ptp::PlanningResult::Success && status != ptp::PlanningResult::Partial) {
             // Could not plan a path. Add the attempted goal point to the path for visualization
@@ -138,14 +147,19 @@ CandidateView::CandidateView(const se::Octree<VoxelImpl::VoxelType>& map,
             // std::cout << "Path planning failed"<< std::endl;
             return;
         }
-        // 打印路径规划成功
-        // std::cout << "Path planning success"<< std::endl;
         path_MB_ = convertPath(planner.getPath());
+        // 打印转换后的路径
+        std::cout << "转换后的路径Path_WB_: " << std::endl;
+        for (const auto& pose : path_MB_) {
+            std::cout << (T_MW_.inverse() * pose).transpose() << std::endl;
+            //问题 路径规划的终点与目标点不一致
+        }
         // The first path vertex should have the same position as the current pose but a unit
         // orientation. Set it to exactly the current pose.
         assert((path_MB_.front().topRightCorner<3, 1>().isApprox(T_MB.topRightCorner<3, 1>())
                 && "The first path position is the current position"));
         path_MB_.front() = T_MB;
+        
     }
     // Raycast and compute the composite gain image.
     entropyRaycast(T_MB_history);
@@ -221,7 +235,7 @@ const Eigen::Matrix4f& CandidateView::goalT_MB() const
 {
     if (path_MB_.empty()) {
         //打印if语句
-        std::cout << "path_MB_.empty()  --------------return invalid_T_MB;" << std::endl;
+        // std::cout << "path_MB_.empty()  --------------return invalid_T_MB;" << std::endl;
         static Eigen::Matrix4f invalid_T_MB = Eigen::Matrix4f::Identity();
         invalid_T_MB.topRightCorner<3, 1>() = Eigen::Vector3f::Constant(NAN);
         return invalid_T_MB;
@@ -683,6 +697,8 @@ Path CandidateView::convertPath(const ptp::Path<ptp::kDim>::Ptr ptp_path)
 
 void CandidateView::removeSmallMovements(Path& path, const float radius)
 {
+    //打印调用了removeSmallMovements函数
+    std::cout << "调用了removeSmallMovements函数" << std::endl;
     if (!path.empty()) {
         const Eigen::Vector3f t_MB_0 = path[0].topRightCorner<3, 1>();
         for (size_t i = 1; i < path.size(); ++i) {

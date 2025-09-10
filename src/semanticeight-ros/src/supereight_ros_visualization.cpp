@@ -378,7 +378,7 @@ void SupereightNode::visualizeCandidates(float opacity)
     for (const auto& candidate : planner_->candidateViews()) {
         if (candidate.isValid()) {
             // Pose.
-            const Eigen::Matrix4f& goal_T_MB = candidate.goalT_MB();
+            const Eigen::Matrix4f& goal_T_MB = candidate.goalT_MB();    //在这里获取Pose的坐标，返回CandidateView类的私有变量path_MB_的最后一个元素
             pose_marker.pose.position = eigen_to_point(goal_T_MB.topRightCorner<3, 1>());
             pose_marker.pose.orientation =
                 eigen_to_quaternion(Eigen::Quaternionf(goal_T_MB.topLeftCorner<3, 3>()));
@@ -404,7 +404,7 @@ void SupereightNode::visualizeCandidates(float opacity)
             map_candidate_pub_.publish(path_marker);
             path_marker.id++;
             // Desired position.
-            desired_marker.pose.position = eigen_to_point(candidate.desired_t_MB_);
+            desired_marker.pose.position = eigen_to_point(candidate.desired_t_MB_);     //在这里获取Desired的坐标
             map_candidate_pub_.publish(desired_marker);
             desired_marker.id++;
         }

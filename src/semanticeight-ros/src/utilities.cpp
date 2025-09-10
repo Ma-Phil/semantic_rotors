@@ -491,8 +491,8 @@ void publish_path_open_loop(se::ExplorationPlanner& planner,
             //         0, 1, 0, 0,
             //         1, 0, 0, 0,
             //         0, 0, 0, 1;
-            // //打印T_WB
-            // std::cout << std::endl << "T_WB in publish_path_open_loop: " << T_WB.transpose() << std::endl << std::endl;
+            //打印T_WB
+            std::cout << std::endl << "T_WB in publish_path_open_loop: " << T_WB.transpose() << std::endl << std::endl;
             // 明确传递速度参数
             // path_pub.publish(pose_to_traj_msg(T_WB, header, 1.0f, 1.0f));
 
