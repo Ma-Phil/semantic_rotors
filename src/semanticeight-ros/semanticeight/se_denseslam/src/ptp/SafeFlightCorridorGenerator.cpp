@@ -85,8 +85,27 @@ PlanningResult SafeFlightCorridorGenerator::planPath(const Eigen::Vector3f& star
         ompl::geometric::SimpleSetup ss(si_);
         ss.getProblemDefinition()->addSolutionPath(pdef_->getSolutionPath());
         og::PathGeometric path = ss.getSolutionPath();
+
+        // // 打印简化前的OMPL路径
+        // std::cout << "原始OMPL路径（简化前）: " << std::endl;
+        // std::cout << "路径点数: " << path.getStateCount() << std::endl;
+        // for (size_t i = 0; i < path.getStateCount(); ++i) {
+        //     const auto* state = path.getState(i)->as<ob::RealVectorStateSpace::StateType>();
+        //     std::cout << "点" << i << ": (" << state->values[0] << ", " 
+        //             << state->values[1] << ", " << state->values[2] << ")" << std::endl;
+        // }
+
         // Simplify path
         prunePath(path);
+        
+        // // 打印简化后的OMPL路径
+        // std::cout << "简化后的OMPL路径: " << std::endl;
+        // std::cout << "路径点数: " << path.getStateCount() << std::endl;
+        // for (size_t i = 0; i < path.getStateCount(); ++i) {
+        //     const auto* state = path.getState(i)->as<ob::RealVectorStateSpace::StateType>();
+        //     std::cout << "点" << i << ": (" << state->values[0] << ", " 
+        //             << state->values[1] << ", " << state->values[2] << ")" << std::endl;
+        // }
         // Convert final path to Eigen
         OmplToEigen::convertPath(path, path_, min_flight_corridor_radius_);
         if (!start_inside) {
@@ -94,6 +113,11 @@ PlanningResult SafeFlightCorridorGenerator::planPath(const Eigen::Vector3f& star
                                   State<kDim>{start_point_M, min_flight_corridor_radius_});
         }
 
+        // //打印Eigen路径
+        // std::cout << "Eigen path: " << std::endl;
+        // for (const auto& state : path_->states) {
+        //     std::cout << "(" << state.segment_end.transpose() << ")" << std::endl;
+        // }
         if (pdef_->hasApproximateSolution()) {
             // TODO SEM Consider checking that the approximate solution is within some threshold of
             // the goal, otherwise return PlanningResult::Failed.

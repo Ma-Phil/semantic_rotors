@@ -159,7 +159,10 @@ CandidateView::CandidateView(const se::Octree<VoxelImpl::VoxelType>& map,
         assert((path_MB_.front().topRightCorner<3, 1>().isApprox(T_MB.topRightCorner<3, 1>())
                 && "The first path position is the current position"));
         path_MB_.front() = T_MB;
-        
+
+        // CandidateView构造函数中，在path_MB_末尾插入目标点
+        path_MB_.push_back(Eigen::Matrix4f::Identity());
+        path_MB_.back().topRightCorner<3, 1>() = config_.planner_config.goal_t_MB_;
     }
     // Raycast and compute the composite gain image.
     entropyRaycast(T_MB_history);
