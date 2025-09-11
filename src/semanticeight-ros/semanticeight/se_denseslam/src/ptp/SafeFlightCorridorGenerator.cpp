@@ -59,9 +59,17 @@ SafeFlightCorridorGenerator::SafeFlightCorridorGenerator(
 PlanningResult SafeFlightCorridorGenerator::planPath(const Eigen::Vector3f& start_point_M,
                                                      const Eigen::Vector3f& goal_point_M)
 {
-    const bool start_inside = ow_.inMapBoundsMeter(start_point_M);
+    const bool start_inside = ow_.inMapBoundsMeter(start_point_M);       //出错位置
+    
+    // start_inside: 0意味着：
+    //     输入的起点start_point_M位于地图定义的边界之外
+    //     系统会自动计算地图边界内离该起点最近的点作为实际规划的起点：
+
     const Eigen::Vector3f start_M =
         start_inside ? start_point_M : ow_.closestPointMeter(start_point_M);
+    //打印边界检查结果
+    std::cout << "start_inside: " << start_inside << std::endl;
+    std::cout << "start_M: " << start_M.transpose() << std::endl;
 
     // Don't test the goal point occupancy to allow planning partial paths.
     //if(!pcc_.checkSphere(goal_point_M, min_flight_corridor_radius_)) {

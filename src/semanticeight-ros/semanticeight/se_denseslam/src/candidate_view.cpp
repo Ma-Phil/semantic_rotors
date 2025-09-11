@@ -687,6 +687,8 @@ Path CandidateView::convertPath(const ptp::Path<ptp::kDim>::Ptr ptp_path)
 {
     Path path(ptp_path->states.size(), Eigen::Matrix4f::Identity());
     for (size_t i = 0; i < ptp_path->states.size(); ++i) {
+        //打印ptp_path->states[i].segment_end
+        std::cout <<i<< "   ptp_path->states[i].segment_end: " << ptp_path->states[i].segment_end.transpose() << std::endl;
         const Eigen::Vector3f& t_MB = ptp_path->states[i].segment_end;
         path[i].topRightCorner<3, 1>() = t_MB;
     }
