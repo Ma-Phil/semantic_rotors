@@ -24,6 +24,6 @@ float percentage_at_distance(const std::vector<float>& mesh_distances, float des
 template<typename T>
 T mean(const std::vector<T>& v)
 {
-    return std::reduce(v.begin(), v.end()) / v.size();
+    return std::accumulate(v.begin(), v.end(), T{} )/ v.size();
 }
 #endif // MESH_PROPERTIES_HPP
