@@ -1,0 +1,38 @@
+[01m[K/home/mz/semantic_rotors/src/semanticeight-ros/semanticeight/se_denseslam/src/ptp/ProbCollisionChecker.cpp:[m[K In member function ‘[01m[Kbool ptp::ProbCollisionChecker::checkSphere(const Vector3f&, float) const[m[K’:
+[01m[K/home/mz/semantic_rotors/src/semanticeight-ros/semanticeight/se_denseslam/src/ptp/ProbCollisionChecker.cpp:366:22:[m[K [01;35m[Kwarning: [m[K‘[01m[K*((void*)& volume_data +15)[m[K’ may be used uninitialized in this function [[01;35m[K-Wmaybe-uninitialized[m[K]
+     if (![01;35m[Kvolume_data.observed[m[K || volume_data.x * volume_data.y >= free_threshold_) {
+          [01;35m[K~~~~~~~~~~~~^~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/src/semanticeight-ros/semanticeight/se_denseslam/src/ptp/ProbCollisionChecker.cpp:351:43:[m[K [01;36m[Knote: [m[K‘[01m[K*((void*)& volume_data +15)[m[K’ was declared here
+     MultiresOFusion::VoxelType::VoxelData [01;36m[Kvolume_data[m[K;
+                                           [01;36m[K^~~~~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/src/semanticeight-ros/semanticeight/se_denseslam/src/ptp/ProbCollisionChecker.cpp:366:48:[m[K [01;35m[Kwarning: [m[K‘[01m[K*((void*)& volume_data +10)[m[K’ may be used uninitialized in this function [[01;35m[K-Wmaybe-uninitialized[m[K]
+     if (!volume_data.observed || [01;35m[Kvolume_data.x * volume_data.y[m[K >= free_threshold_) {
+                                  [01;35m[K~~~~~~~~~~~~~~^~~~~~~~~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/src/semanticeight-ros/semanticeight/se_denseslam/src/ptp/ProbCollisionChecker.cpp:351:43:[m[K [01;36m[Knote: [m[K‘[01m[K*((void*)& volume_data +10)[m[K’ was declared here
+     MultiresOFusion::VoxelType::VoxelData [01;36m[Kvolume_data[m[K;
+                                           [01;36m[K^~~~~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/src/semanticeight-ros/semanticeight/se_denseslam/src/ptp/ProbCollisionChecker.cpp:366:48:[m[K [01;35m[Kwarning: [m[K‘[01m[Kvolume_data[m[K’ may be used uninitialized in this function [[01;35m[K-Wmaybe-uninitialized[m[K]
+     if (!volume_data.observed || [01;35m[Kvolume_data.x * volume_data.y[m[K >= free_threshold_) {
+                                  [01;35m[K~~~~~~~~~~~~~~^~~~~~~~~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/src/semanticeight-ros/semanticeight/se_denseslam/src/ptp/ProbCollisionChecker.cpp:351:43:[m[K [01;36m[Knote: [m[K‘[01m[Kvolume_data[m[K’ was declared here
+     MultiresOFusion::VoxelType::VoxelData [01;36m[Kvolume_data[m[K;
+                                           [01;36m[K^~~~~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/src/semanticeight-ros/semanticeight/se_denseslam/src/ptp/ProbCollisionChecker.cpp:[m[K In member function ‘[01m[Kbool ptp::ProbCollisionChecker::checkSegmentFlightCorridor(const Vector3f&, const Vector3f&, float) const[m[K’:
+[01m[K/home/mz/semantic_rotors/src/semanticeight-ros/semanticeight/se_denseslam/src/ptp/ProbCollisionChecker.cpp:366:22:[m[K [01;35m[Kwarning: [m[K‘[01m[K*((void*)& volume_data +15)[m[K’ may be used uninitialized in this function [[01;35m[K-Wmaybe-uninitialized[m[K]
+     if (![01;35m[Kvolume_data.observed[m[K || volume_data.x * volume_data.y >= free_threshold_) {
+          [01;35m[K~~~~~~~~~~~~^~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/src/semanticeight-ros/semanticeight/se_denseslam/src/ptp/ProbCollisionChecker.cpp:351:43:[m[K [01;36m[Knote: [m[K‘[01m[K*((void*)& volume_data +15)[m[K’ was declared here
+     MultiresOFusion::VoxelType::VoxelData [01;36m[Kvolume_data[m[K;
+                                           [01;36m[K^~~~~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/src/semanticeight-ros/semanticeight/se_denseslam/src/ptp/ProbCollisionChecker.cpp:366:48:[m[K [01;35m[Kwarning: [m[K‘[01m[K*((void*)& volume_data +10)[m[K’ may be used uninitialized in this function [[01;35m[K-Wmaybe-uninitialized[m[K]
+     if (!volume_data.observed || [01;35m[Kvolume_data.x * volume_data.y[m[K >= free_threshold_) {
+                                  [01;35m[K~~~~~~~~~~~~~~^~~~~~~~~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/src/semanticeight-ros/semanticeight/se_denseslam/src/ptp/ProbCollisionChecker.cpp:351:43:[m[K [01;36m[Knote: [m[K‘[01m[K*((void*)& volume_data +10)[m[K’ was declared here
+     MultiresOFusion::VoxelType::VoxelData [01;36m[Kvolume_data[m[K;
+                                           [01;36m[K^~~~~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/src/semanticeight-ros/semanticeight/se_denseslam/src/ptp/ProbCollisionChecker.cpp:366:48:[m[K [01;35m[Kwarning: [m[K‘[01m[Kvolume_data[m[K’ may be used uninitialized in this function [[01;35m[K-Wmaybe-uninitialized[m[K]
+     if (!volume_data.observed || [01;35m[Kvolume_data.x * volume_data.y[m[K >= free_threshold_) {
+                                  [01;35m[K~~~~~~~~~~~~~~^~~~~~~~~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/src/semanticeight-ros/semanticeight/se_denseslam/src/ptp/ProbCollisionChecker.cpp:351:43:[m[K [01;36m[Knote: [m[K‘[01m[Kvolume_data[m[K’ was declared here
+     MultiresOFusion::VoxelType::VoxelData [01;36m[Kvolume_data[m[K;
+                                           [01;36m[K^~~~~~~~~~~[m[K

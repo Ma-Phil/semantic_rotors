@@ -1,0 +1,89 @@
+In file included from [01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/include/mav_interface_msgs/conversions.h:15[m[K,
+                 from [01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/src/conversions.cpp:11[m[K:
+[01m[K/home/mz/semantic_rotors/devel/.private/mav_interface_msgs/include/mav_interface_msgs/Path.h:50:47:[m[K [01;31m[Kerror: [m[K‘[01m[KWaypoint_[m[K’ is not a member of ‘[01m[Kmav_interface_msgs[m[K’
+    typedef std::vector< ::mav_interface_msgs::[01;31m[KWaypoint_[m[K<ContainerAllocator> , typename std::allocator_traits<ContainerAllocator>::template rebind_alloc< ::mav_interface_msgs::Waypoint_<ContainerAllocator> >> _waypoints_type;
+                                               [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/devel/.private/mav_interface_msgs/include/mav_interface_msgs/Path.h:50:47:[m[K [01;31m[Kerror: [m[K‘[01m[KWaypoint_[m[K’ is not a member of ‘[01m[Kmav_interface_msgs[m[K’
+[01m[K/home/mz/semantic_rotors/devel/.private/mav_interface_msgs/include/mav_interface_msgs/Path.h:50:75:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+    typedef std::vector< ::mav_interface_msgs::Waypoint_<ContainerAllocator[01;31m[K>[m[K , typename std::allocator_traits<ContainerAllocator>::template rebind_alloc< ::mav_interface_msgs::Waypoint_<ContainerAllocator> >> _waypoints_type;
+                                                                           [01;31m[K^[m[K
+[01m[K/home/mz/semantic_rotors/devel/.private/mav_interface_msgs/include/mav_interface_msgs/Path.h:50:75:[m[K [01;31m[Kerror: [m[Ktemplate argument 2 is invalid
+[01m[K/home/mz/semantic_rotors/devel/.private/mav_interface_msgs/include/mav_interface_msgs/Path.h:50:77:[m[K [01;31m[Kerror: [m[Kexpected unqualified-id before ‘[01m[K,[m[K’ token
+    typedef std::vector< ::mav_interface_msgs::Waypoint_<ContainerAllocator> [01;31m[K,[m[K typename std::allocator_traits<ContainerAllocator>::template rebind_alloc< ::mav_interface_msgs::Waypoint_<ContainerAllocator> >> _waypoints_type;
+                                                                             [01;31m[K^[m[K
+[01m[K/home/mz/semantic_rotors/devel/.private/mav_interface_msgs/include/mav_interface_msgs/Path.h:51:3:[m[K [01;31m[Kerror: [m[K‘[01m[K_waypoints_type[m[K’ does not name a type
+   [01;31m[K_waypoints_type[m[K waypoints;
+   [01;31m[K^~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/include/mav_interface_msgs/conversions.h:15[m[K,
+                 from [01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/src/conversions.cpp:11[m[K:
+[01m[K/home/mz/semantic_rotors/devel/.private/mav_interface_msgs/include/mav_interface_msgs/Path.h:[m[K In constructor ‘[01m[Kmav_interface_msgs::Path_<ContainerAllocator>::Path_()[m[K’:
+[01m[K/home/mz/semantic_rotors/devel/.private/mav_interface_msgs/include/mav_interface_msgs/Path.h:31:7:[m[K [01;31m[Kerror: [m[Kclass ‘[01m[Kmav_interface_msgs::Path_<ContainerAllocator>[m[K’ does not have any field named ‘[01m[Kwaypoints[m[K’
+     , [01;31m[Kwaypoints[m[K()
+       [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/devel/.private/mav_interface_msgs/include/mav_interface_msgs/Path.h:[m[K In constructor ‘[01m[Kmav_interface_msgs::Path_<ContainerAllocator>::Path_(const ContainerAllocator&)[m[K’:
+[01m[K/home/mz/semantic_rotors/devel/.private/mav_interface_msgs/include/mav_interface_msgs/Path.h:37:7:[m[K [01;31m[Kerror: [m[Kclass ‘[01m[Kmav_interface_msgs::Path_<ContainerAllocator>[m[K’ does not have any field named ‘[01m[Kwaypoints[m[K’
+     , [01;31m[Kwaypoints[m[K(_alloc)
+       [01;31m[K^~~~~~~~~[m[K
+In file included from [01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/include/mav_interface_msgs/conversions.h:15[m[K,
+                 from [01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/src/conversions.cpp:11[m[K:
+[01m[K/home/mz/semantic_rotors/devel/.private/mav_interface_msgs/include/mav_interface_msgs/Path.h:[m[K In static member function ‘[01m[Kstatic void ros::message_operations::Printer<mav_interface_msgs::Path_<ContainerAllocator> >::stream(Stream&, const string&, const mav_interface_msgs::Path_<ContainerAllocator>&)[m[K’:
+[01m[K/home/mz/semantic_rotors/devel/.private/mav_interface_msgs/include/mav_interface_msgs/Path.h:284:38:[m[K [01;31m[Kerror: [m[K‘[01m[KWaypoint_[m[K’ is not a member of ‘[01m[Kmav_interface_msgs[m[K’
+       Printer< ::mav_interface_msgs::[01;31m[KWaypoint_[m[K<ContainerAllocator> >::stream(s, false ? std::string() : indent + "    ", v.waypoints[i]);
+                                      [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/devel/.private/mav_interface_msgs/include/mav_interface_msgs/Path.h:284:38:[m[K [01;31m[Kerror: [m[K‘[01m[KWaypoint_[m[K’ is not a member of ‘[01m[Kmav_interface_msgs[m[K’
+[01m[K/home/mz/semantic_rotors/devel/.private/mav_interface_msgs/include/mav_interface_msgs/Path.h:284:66:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+       Printer< ::mav_interface_msgs::Waypoint_<ContainerAllocator[01;31m[K>[m[K >::stream(s, false ? std::string() : indent + "    ", v.waypoints[i]);
+                                                                  [01;31m[K^[m[K
+[01m[K/home/mz/semantic_rotors/devel/.private/mav_interface_msgs/include/mav_interface_msgs/Path.h:284:68:[m[K [01;31m[Kerror: [m[Kexpected unqualified-id before ‘[01m[K>[m[K’ token
+       Printer< ::mav_interface_msgs::Waypoint_<ContainerAllocator> [01;31m[K>[m[K::stream(s, false ? std::string() : indent + "    ", v.waypoints[i]);
+                                                                    [01;31m[K^[m[K
+In file included from [01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/src/conversions.cpp:11[m[K:
+[01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/include/mav_interface_msgs/conversions.h:[m[K At global scope:
+[01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/include/mav_interface_msgs/conversions.h:58:67:[m[K [01;31m[Kerror: [m[K‘[01m[KWaypoint[m[K’ has not been declared
+ inline void WaypointEigen2Msg(const WaypointEigen& waypointEigen, [01;31m[KWaypoint[m[K& waypointMsg);
+                                                                   [01;31m[K^~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/include/mav_interface_msgs/conversions.h:66:1:[m[K [01;31m[Kerror: [m[K‘[01m[KFullStateTrajectory[m[K’ does not name a type; did you mean ‘[01m[KFullStateStampedPtr[m[K’?
+ [01;31m[KFullStateTrajectory[m[K resample_trajectory(const FullStateTrajectory& trajectory, const double max_distance);
+ [01;31m[K^~~~~~~~~~~~~~~~~~~[m[K
+ [32m[KFullStateStampedPtr[m[K
+In file included from [01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/include/mav_interface_msgs/conversions.h:70[m[K,
+                 from [01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/src/conversions.cpp:11[m[K:
+[01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/include/mav_interface_msgs/conversions_impl.hpp:39:67:[m[K [01;31m[Kerror: [m[K‘[01m[KWaypoint[m[K’ has not been declared
+ inline void WaypointEigen2Msg(const WaypointEigen& waypointEigen, [01;31m[KWaypoint[m[K& waypointMsg)
+                                                                   [01;31m[K^~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/include/mav_interface_msgs/conversions_impl.hpp:[m[K In function ‘[01m[Kvoid mav_interface_msgs::WaypointEigen2Msg(const mav_interface_msgs::WaypointEigen&, int&)[m[K’:
+[01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/include/mav_interface_msgs/conversions_impl.hpp:42:17:[m[K [01;31m[Kerror: [m[Krequest for member ‘[01m[Kposition[m[K’ in ‘[01m[KwaypointMsg[m[K’, which is of non-class type ‘[01m[Kint[m[K’
+     waypointMsg.[01;31m[Kposition[m[K.x = waypointEigen.position.x();
+                 [01;31m[K^~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/include/mav_interface_msgs/conversions_impl.hpp:43:17:[m[K [01;31m[Kerror: [m[Krequest for member ‘[01m[Kposition[m[K’ in ‘[01m[KwaypointMsg[m[K’, which is of non-class type ‘[01m[Kint[m[K’
+     waypointMsg.[01;31m[Kposition[m[K.y = waypointEigen.position.y();
+                 [01;31m[K^~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/include/mav_interface_msgs/conversions_impl.hpp:44:17:[m[K [01;31m[Kerror: [m[Krequest for member ‘[01m[Kposition[m[K’ in ‘[01m[KwaypointMsg[m[K’, which is of non-class type ‘[01m[Kint[m[K’
+     waypointMsg.[01;31m[Kposition[m[K.z = waypointEigen.position.z();
+                 [01;31m[K^~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/include/mav_interface_msgs/conversions_impl.hpp:47:17:[m[K [01;31m[Kerror: [m[Krequest for member ‘[01m[Korientation[m[K’ in ‘[01m[KwaypointMsg[m[K’, which is of non-class type ‘[01m[Kint[m[K’
+     waypointMsg.[01;31m[Korientation[m[K.w = waypointEigen.orientation.w();
+                 [01;31m[K^~~~~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/include/mav_interface_msgs/conversions_impl.hpp:48:17:[m[K [01;31m[Kerror: [m[Krequest for member ‘[01m[Korientation[m[K’ in ‘[01m[KwaypointMsg[m[K’, which is of non-class type ‘[01m[Kint[m[K’
+     waypointMsg.[01;31m[Korientation[m[K.x = waypointEigen.orientation.x();
+                 [01;31m[K^~~~~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/include/mav_interface_msgs/conversions_impl.hpp:49:17:[m[K [01;31m[Kerror: [m[Krequest for member ‘[01m[Korientation[m[K’ in ‘[01m[KwaypointMsg[m[K’, which is of non-class type ‘[01m[Kint[m[K’
+     waypointMsg.[01;31m[Korientation[m[K.y = waypointEigen.orientation.y();
+                 [01;31m[K^~~~~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/include/mav_interface_msgs/conversions_impl.hpp:50:17:[m[K [01;31m[Kerror: [m[Krequest for member ‘[01m[Korientation[m[K’ in ‘[01m[KwaypointMsg[m[K’, which is of non-class type ‘[01m[Kint[m[K’
+     waypointMsg.[01;31m[Korientation[m[K.z = waypointEigen.orientation.z();
+                 [01;31m[K^~~~~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/include/mav_interface_msgs/conversions_impl.hpp:53:17:[m[K [01;31m[Kerror: [m[Krequest for member ‘[01m[KpositionTolerance[m[K’ in ‘[01m[KwaypointMsg[m[K’, which is of non-class type ‘[01m[Kint[m[K’
+     waypointMsg.[01;31m[KpositionTolerance[m[K = waypointEigen.positionTolerance;
+                 [01;31m[K^~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/include/mav_interface_msgs/conversions_impl.hpp:54:17:[m[K [01;31m[Kerror: [m[Krequest for member ‘[01m[KorientationTolerance[m[K’ in ‘[01m[KwaypointMsg[m[K’, which is of non-class type ‘[01m[Kint[m[K’
+     waypointMsg.[01;31m[KorientationTolerance[m[K = waypointEigen.orientationTolerance;
+                 [01;31m[K^~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/src/conversions.cpp:[m[K At global scope:
+[01m[K/home/mz/semantic_rotors/src/mav_interface_msgs/src/conversions.cpp:76:1:[m[K [01;31m[Kerror: [m[K‘[01m[KFullStateTrajectory[m[K’ does not name a type; did you mean ‘[01m[KFullStateStampedPtr[m[K’?
+ [01;31m[KFullStateTrajectory[m[K resample_trajectory(const FullStateTrajectory& trajectory,
+ [01;31m[K^~~~~~~~~~~~~~~~~~~[m[K
+ [32m[KFullStateStampedPtr[m[K
+make[2]: *** [CMakeFiles/mav_interface_msgs.dir/build.make:79：CMakeFiles/mav_interface_msgs.dir/src/conversions.cpp.o] 错误 1
+make[1]: *** [CMakeFiles/Makefile2:2702：CMakeFiles/mav_interface_msgs.dir/all] 错误 2
+make: *** [Makefile:146：all] 错误 2

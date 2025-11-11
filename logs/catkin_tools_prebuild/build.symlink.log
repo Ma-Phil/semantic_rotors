@@ -1,0 +1,13 @@
+Symlinking /home/mz/semantic_rotors/devel/./setup.sh
+Symlinking /home/mz/semantic_rotors/devel/./local_setup.zsh
+Symlinking /home/mz/semantic_rotors/devel/./local_setup.fish
+Symlinking /home/mz/semantic_rotors/devel/./local_setup.bash
+Symlinking /home/mz/semantic_rotors/devel/./_setup_util.py
+Symlinking /home/mz/semantic_rotors/devel/./setup.bash
+Symlinking /home/mz/semantic_rotors/devel/./setup.zsh
+Symlinking /home/mz/semantic_rotors/devel/./setup.fish
+Symlinking /home/mz/semantic_rotors/devel/./env.sh
+Symlinking /home/mz/semantic_rotors/devel/./local_setup.sh
+Symlinking /home/mz/semantic_rotors/devel/share/catkin_tools_prebuild/cmake/catkin_tools_prebuildConfig-version.cmake
+Symlinking /home/mz/semantic_rotors/devel/share/catkin_tools_prebuild/cmake/catkin_tools_prebuildConfig.cmake
+Symlinking /home/mz/semantic_rotors/devel/lib/pkgconfig/catkin_tools_prebuild.pc

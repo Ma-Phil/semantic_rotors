@@ -1,0 +1,6 @@
+Symlinking /home/mz/semantic_rotors/devel/share/rotors_gazebo/cmake/rotors_gazeboConfig-version.cmake
+Symlinking /home/mz/semantic_rotors/devel/share/rotors_gazebo/cmake/rotors_gazeboConfig.cmake
+Symlinking /home/mz/semantic_rotors/devel/lib/pkgconfig/rotors_gazebo.pc
+Symlinking /home/mz/semantic_rotors/devel/lib/rotors_gazebo/waypoint_publisher_file
+Symlinking /home/mz/semantic_rotors/devel/lib/rotors_gazebo/hovering_example
+Symlinking /home/mz/semantic_rotors/devel/lib/rotors_gazebo/waypoint_publisher

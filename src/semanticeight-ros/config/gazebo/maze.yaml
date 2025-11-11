@@ -13,10 +13,10 @@ supereight:
   map:
     size:                       512
     dim:                        51.2
-    aabb_min_W:                 [-100.0, -100.0, 0.0]
-    aabb_max_W:                 [ 100.0,  100.0, 80.5]
-    sampling_min_W:             [-100.0, -100.0, 0.2]
-    sampling_max_W:             [ 100.0,  100.0, 70.8]
+    aabb_min_W:                 [-200.0, -200.0, 0.0]
+    aabb_max_W:                 [ 200.0,  200.0, 80.5]
+    sampling_min_W:             [-200.0, -200.0, 0.2]
+    sampling_max_W:             [ 200.0,  200.0, 70.8]
     frontier_cluster_min_ratio: 0.015625
   exploration:
     delta_t:                    0.25      #原0.25

@@ -1,0 +1,14 @@
+[  2%] Built target cnpy
+[  4%] Built target lodepng
+[  7%] Built target se-morton-tool
+[ 11%] Built target mesh-diff
+[ 14%] Built target frustum-intersector
+[ 28%] Built target se-shared
+[ 30%] Built target se-voxel-size
+[ 33%] Built target compare-multiple
+[ 38%] Built target se-voxel-impl-multiresofusion-pinholecamera
+[ 40%] Built target compare-single
+[ 46%] Built target se-voxel-impl-multirestsdf-pinholecamera
+[ 77%] Built target se-denseslam-pinholecamera
+[ 89%] Built target se-denseslam-pinholecamera-main
+[100%] Built target semanticeight_ros

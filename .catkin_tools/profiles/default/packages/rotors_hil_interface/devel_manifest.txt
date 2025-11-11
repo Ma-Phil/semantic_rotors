@@ -1,0 +1,6 @@
+rotors_simulator/rotors_hil_interface
+/home/mz/semantic_rotors/devel/.private/rotors_hil_interface/share/rotors_hil_interface/cmake/rotors_hil_interfaceConfig-version.cmake /home/mz/semantic_rotors/devel/share/rotors_hil_interface/cmake/rotors_hil_interfaceConfig-version.cmake
+/home/mz/semantic_rotors/devel/.private/rotors_hil_interface/share/rotors_hil_interface/cmake/rotors_hil_interfaceConfig.cmake /home/mz/semantic_rotors/devel/share/rotors_hil_interface/cmake/rotors_hil_interfaceConfig.cmake
+/home/mz/semantic_rotors/devel/.private/rotors_hil_interface/lib/librotors_hil_interface.so /home/mz/semantic_rotors/devel/lib/librotors_hil_interface.so
+/home/mz/semantic_rotors/devel/.private/rotors_hil_interface/lib/rotors_hil_interface/rotors_hil_interface_node /home/mz/semantic_rotors/devel/lib/rotors_hil_interface/rotors_hil_interface_node
+/home/mz/semantic_rotors/devel/.private/rotors_hil_interface/lib/pkgconfig/rotors_hil_interface.pc /home/mz/semantic_rotors/devel/lib/pkgconfig/rotors_hil_interface.pc

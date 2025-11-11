@@ -1,0 +1,29 @@
+[  2%] Built target cnpy
+[  4%] Built target lodepng
+[  7%] Built target se-morton-tool
+[  8%] [32mBuilding CXX object /home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/build/CMakeFiles/mesh-diff.dir/src/mesh_properties.cpp.o[0m
+[ 23%] Built target se-shared
+[ 25%] Built target frustum-intersector
+[ 26%] [32mBuilding CXX object semanticeight/se_voxel_impl/CMakeFiles/se-voxel-impl-multirestsdf-pinholecamera.dir/src/MultiresTSDF/MultiresTSDF.cpp.o[0m
+[ 28%] [32mBuilding CXX object semanticeight/se_voxel_impl/CMakeFiles/se-voxel-impl-multirestsdf-pinholecamera.dir/src/MultiresTSDF/MultiresTSDF_allocation.cpp.o[0m
+[ 28%] [32mBuilding CXX object semanticeight/se_voxel_impl/CMakeFiles/se-voxel-impl-multiresofusion-pinholecamera.dir/src/MultiresOFusion/MultiresOFusion.cpp.o[0m
+[ 29%] [32mBuilding CXX object semanticeight/se_voxel_impl/CMakeFiles/se-voxel-impl-multirestsdf-pinholecamera.dir/src/MultiresTSDF/MultiresTSDF_mapping.cpp.o[0m
+[ 30%] [32mBuilding CXX object semanticeight/se_voxel_impl/CMakeFiles/se-voxel-impl-multirestsdf-pinholecamera.dir/src/MultiresTSDF/MultiresTSDF_rendering.cpp.o[0m
+[ 32%] [32mBuilding CXX object semanticeight/se_voxel_impl/CMakeFiles/se-voxel-impl-multiresofusion-pinholecamera.dir/src/MultiresOFusion/MultiresOFusion_mapping.cpp.o[0m
+[ 33%] [32mBuilding CXX object semanticeight/se_voxel_impl/CMakeFiles/se-voxel-impl-multiresofusion-pinholecamera.dir/src/MultiresOFusion/MultiresOFusion_rendering.cpp.o[0m
+[ 34%] [32mBuilding CXX object semanticeight/se_apps/CMakeFiles/se-voxel-size.dir/src/voxel_size.cpp.o[0m
+In file included from [01m[K/home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/src/mesh_properties.cpp:8[m[K:
+[01m[K/home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/include/mesh_properties.hpp:[m[K In function ‘[01m[KT mean(const std::vector<T>&)[m[K’:
+[01m[K/home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/include/mesh_properties.hpp:27:17:[m[K [01;31m[Kerror: [m[K‘[01m[Kreduce[m[K’ is not a member of ‘[01m[Kstd[m[K’
+     return std::[01;31m[Kreduce[m[K(v.begin(), v.end()) / v.size();
+                 [01;31m[K^~~~~~[m[K
+make[2]: *** [/home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/build/CMakeFiles/mesh-diff.dir/build.make:93：/home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/build/CMakeFiles/mesh-diff.dir/src/mesh_properties.cpp.o] 错误 1
+make[1]: *** [CMakeFiles/Makefile2:3715：/home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/build/CMakeFiles/mesh-diff.dir/all] 错误 2
+make[1]: *** 正在等待未完成的任务....
+[ 35%] [32m[1mLinking CXX executable se-voxel-size[0m
+[ 35%] Built target se-voxel-size
+[ 36%] [32m[1mLinking CXX static library libse-voxel-impl-multirestsdf-pinholecamera.a[0m
+[ 36%] Built target se-voxel-impl-multirestsdf-pinholecamera
+[ 38%] [32m[1mLinking CXX static library libse-voxel-impl-multiresofusion-pinholecamera.a[0m
+[ 38%] Built target se-voxel-impl-multiresofusion-pinholecamera
+make: *** [Makefile:146：all] 错误 2

@@ -1,0 +1,20 @@
+[  3%] Built target lodepng
+[  4%] Built target cnpy
+[  7%] Built target se-morton-tool
+[ 21%] Built target se-shared
+[ 23%] Built target frustum-intersector
+[ 25%] [32mBuilding CXX object /home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/build/CMakeFiles/mesh-diff.dir/src/mesh_properties.cpp.o[0m
+[ 27%] Built target se-voxel-size
+[ 32%] Built target se-voxel-impl-multiresofusion-pinholecamera
+[ 38%] Built target se-voxel-impl-multirestsdf-pinholecamera
+[ 69%] Built target se-denseslam-pinholecamera
+[ 80%] Built target se-denseslam-pinholecamera-main
+[ 91%] Built target semanticeight_ros
+In file included from [01m[K/home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/src/mesh_properties.cpp:8[m[K:
+[01m[K/home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/include/mesh_properties.hpp:[m[K In function ‘[01m[KT mean(const std::vector<T>&)[m[K’:
+[01m[K/home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/include/mesh_properties.hpp:27:17:[m[K [01;31m[Kerror: [m[K‘[01m[Kreduce[m[K’ is not a member of ‘[01m[Kstd[m[K’
+     return std::[01;31m[Kreduce[m[K(v.begin(), v.end()) / v.size();
+                 [01;31m[K^~~~~~[m[K
+make[2]: *** [/home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/build/CMakeFiles/mesh-diff.dir/build.make:93：/home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/build/CMakeFiles/mesh-diff.dir/src/mesh_properties.cpp.o] 错误 1
+make[1]: *** [CMakeFiles/Makefile2:3715：/home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/build/CMakeFiles/mesh-diff.dir/all] 错误 2
+make: *** [Makefile:146：all] 错误 2

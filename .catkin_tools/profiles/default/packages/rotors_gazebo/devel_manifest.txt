@@ -1,0 +1,7 @@
+rotors_simulator/rotors_gazebo
+/home/mz/semantic_rotors/devel/.private/rotors_gazebo/share/rotors_gazebo/cmake/rotors_gazeboConfig-version.cmake /home/mz/semantic_rotors/devel/share/rotors_gazebo/cmake/rotors_gazeboConfig-version.cmake
+/home/mz/semantic_rotors/devel/.private/rotors_gazebo/share/rotors_gazebo/cmake/rotors_gazeboConfig.cmake /home/mz/semantic_rotors/devel/share/rotors_gazebo/cmake/rotors_gazeboConfig.cmake
+/home/mz/semantic_rotors/devel/.private/rotors_gazebo/lib/pkgconfig/rotors_gazebo.pc /home/mz/semantic_rotors/devel/lib/pkgconfig/rotors_gazebo.pc
+/home/mz/semantic_rotors/devel/.private/rotors_gazebo/lib/rotors_gazebo/waypoint_publisher_file /home/mz/semantic_rotors/devel/lib/rotors_gazebo/waypoint_publisher_file
+/home/mz/semantic_rotors/devel/.private/rotors_gazebo/lib/rotors_gazebo/hovering_example /home/mz/semantic_rotors/devel/lib/rotors_gazebo/hovering_example
+/home/mz/semantic_rotors/devel/.private/rotors_gazebo/lib/rotors_gazebo/waypoint_publisher /home/mz/semantic_rotors/devel/lib/rotors_gazebo/waypoint_publisher

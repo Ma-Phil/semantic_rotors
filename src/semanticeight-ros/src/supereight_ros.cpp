@@ -1090,7 +1090,8 @@ void SupereightNode::plan()
             fused_at_goal_ = false;
             visualizeCandidates(0.25f);
             visualizeGoal(0.25f);
-            if (planner_->needsNewGoal()) {
+            // if (planner_->needsNewGoal()) {
+            if (true) {
                 stats_.newFrame("planning");
 
                 Eigen::Matrix4f planning_T_WC;

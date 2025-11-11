@@ -1,0 +1,5 @@
+Symlinking /home/mz/semantic_rotors/devel/bin/hil_plugin
+Symlinking /home/mz/semantic_rotors/devel/share/rqt_rotors/cmake/rqt_rotorsConfig.cmake
+Symlinking /home/mz/semantic_rotors/devel/share/rqt_rotors/cmake/rqt_rotorsConfig-version.cmake
+Symlinking /home/mz/semantic_rotors/devel/lib/pkgconfig/rqt_rotors.pc
+Symlinking /home/mz/semantic_rotors/devel/lib/python3/dist-packages/rqt_rotors/__init__.py

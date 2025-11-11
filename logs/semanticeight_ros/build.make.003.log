@@ -1,0 +1,40 @@
+[  2%] Built target lodepng
+[  4%] Built target cnpy
+[  7%] Built target se-morton-tool
+[  9%] Built target frustum-intersector
+[ 23%] Built target se-shared
+[ 25%] [32mBuilding CXX object /home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/build/CMakeFiles/mesh-diff.dir/src/mesh_properties.cpp.o[0m
+[ 27%] Built target se-voxel-size
+[ 33%] Built target se-voxel-impl-multirestsdf-pinholecamera
+[ 38%] Built target se-voxel-impl-multiresofusion-pinholecamera
+[ 69%] Built target se-denseslam-pinholecamera
+[ 70%] [32mBuilding CXX object CMakeFiles/semanticeight_ros.dir/src/control_interface.cpp.o[0m
+[ 71%] [32mBuilding CXX object semanticeight/se_apps/CMakeFiles/se-denseslam-pinholecamera-main.dir/src/main.cpp.o[0m
+[ 75%] [32mBuilding CXX object semanticeight/se_apps/CMakeFiles/se-denseslam-pinholecamera-main.dir/src/reader_interiornet.cpp.o[0m
+[ 72%] [32mBuilding CXX object CMakeFiles/semanticeight_ros.dir/src/dataset.cpp.o[0m
+[ 73%] [32mBuilding CXX object semanticeight/se_apps/CMakeFiles/se-denseslam-pinholecamera-main.dir/src/reader_base.cpp.o[0m
+[ 76%] [32mBuilding CXX object semanticeight/se_apps/CMakeFiles/se-denseslam-pinholecamera-main.dir/src/montage.cpp.o[0m
+[ 77%] [32mBuilding CXX object semanticeight/se_apps/CMakeFiles/se-denseslam-pinholecamera-main.dir/src/reader_newercollege.cpp.o[0m
+[ 78%] [32mBuilding CXX object semanticeight/se_apps/CMakeFiles/se-denseslam-pinholecamera-main.dir/src/reader_openni.cpp.o[0m
+[ 80%] [32mBuilding CXX object CMakeFiles/semanticeight_ros.dir/src/stats.cpp.o[0m
+[ 80%] [32mBuilding CXX object CMakeFiles/semanticeight_ros.dir/src/utilities.cpp.o[0m
+[ 83%] [32mBuilding CXX object semanticeight/se_apps/CMakeFiles/se-denseslam-pinholecamera-main.dir/src/reader_raw.cpp.o[0m
+[ 83%] [32mBuilding CXX object semanticeight/se_apps/CMakeFiles/se-denseslam-pinholecamera-main.dir/src/reader.cpp.o[0m
+[ 84%] [32mBuilding CXX object semanticeight/se_apps/CMakeFiles/se-denseslam-pinholecamera-main.dir/src/reader_tum.cpp.o[0m
+[ 85%] [32mBuilding CXX object CMakeFiles/semanticeight_ros.dir/src/supereight_ros_visualization.cpp.o[0m
+[ 86%] [32mBuilding CXX object CMakeFiles/semanticeight_ros.dir/src/supereight_ros.cpp.o[0m
+[ 88%] [32mBuilding CXX object CMakeFiles/semanticeight_ros.dir/src/supereight_ros_config.cpp.o[0m
+[ 89%] [32mBuilding CXX object CMakeFiles/semanticeight_ros.dir/src/supereight_ros_node.cpp.o[0m
+In file included from [01m[K/home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/src/mesh_properties.cpp:8[m[K:
+[01m[K/home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/include/mesh_properties.hpp:[m[K In function ‘[01m[KT mean(const std::vector<T>&)[m[K’:
+[01m[K/home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/include/mesh_properties.hpp:27:17:[m[K [01;31m[Kerror: [m[K‘[01m[Kreduce[m[K’ is not a member of ‘[01m[Kstd[m[K’
+     return std::[01;31m[Kreduce[m[K(v.begin(), v.end()) / v.size();
+                 [01;31m[K^~~~~~[m[K
+make[2]: *** [/home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/build/CMakeFiles/mesh-diff.dir/build.make:93：/home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/build/CMakeFiles/mesh-diff.dir/src/mesh_properties.cpp.o] 错误 1
+make[1]: *** [CMakeFiles/Makefile2:3715：/home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/build/CMakeFiles/mesh-diff.dir/all] 错误 2
+make[1]: *** 正在等待未完成的任务....
+[ 90%] [32m[1mLinking CXX executable se-denseslam-pinholecamera-main[0m
+[ 90%] Built target se-denseslam-pinholecamera-main
+[ 91%] [32m[1mLinking CXX executable /home/mz/semantic_rotors/devel/.private/semanticeight_ros/lib/semanticeight_ros/semanticeight_ros[0m
+[ 91%] Built target semanticeight_ros
+make: *** [Makefile:146：all] 错误 2

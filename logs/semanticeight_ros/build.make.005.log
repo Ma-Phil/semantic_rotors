@@ -1,0 +1,20 @@
+[  2%] Built target lodepng
+[  4%] Built target se-morton-tool
+[  7%] Built target cnpy
+[  9%] Built target frustum-intersector
+[ 23%] Built target se-shared
+[ 25%] [32mBuilding CXX object /home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/build/CMakeFiles/mesh-diff.dir/src/mesh_properties.cpp.o[0m
+[ 27%] Built target se-voxel-size
+[ 33%] Built target se-voxel-impl-multirestsdf-pinholecamera
+[ 38%] Built target se-voxel-impl-multiresofusion-pinholecamera
+[ 69%] Built target se-denseslam-pinholecamera
+[ 80%] Built target se-denseslam-pinholecamera-main
+[ 91%] Built target semanticeight_ros
+[ 92%] [32m[1mLinking CXX static library libmesh-diff.a[0m
+[ 95%] Built target mesh-diff
+[ 96%] [32mBuilding CXX object /home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/build/CMakeFiles/compare-multiple.dir/src/compare_multiple.cpp.o[0m
+[ 97%] [32mBuilding CXX object /home/mz/semantic_rotors/src/semanticeight-ros/mesh-diff-tool/build/CMakeFiles/compare-single.dir/src/compare_single.cpp.o[0m
+[ 98%] [32m[1mLinking CXX executable compare-multiple[0m
+[ 98%] Built target compare-multiple
+[100%] [32m[1mLinking CXX executable compare-single[0m
+[100%] Built target compare-single

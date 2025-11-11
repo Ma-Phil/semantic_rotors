@@ -1,0 +1,36 @@
+[  0%] Built target geometry_msgs_generate_messages_py
+[  0%] Built target std_msgs_generate_messages_py
+[  0%] Built target nav_msgs_generate_messages_py
+[  0%] Built target tf_generate_messages_py
+[  0%] Built target std_msgs_generate_messages_cpp
+[  0%] Built target geometry_msgs_generate_messages_cpp
+[  0%] Built target nav_msgs_generate_messages_cpp
+[  0%] Built target std_msgs_generate_messages_eus
+[  0%] Built target tf_generate_messages_cpp
+[  0%] Built target nav_msgs_generate_messages_eus
+[  0%] Built target geometry_msgs_generate_messages_eus
+[  0%] Built target tf_generate_messages_eus
+[  0%] Built target std_msgs_generate_messages_lisp
+[  0%] Built target geometry_msgs_generate_messages_lisp
+[  0%] Built target nav_msgs_generate_messages_lisp
+[  0%] Built target tf_generate_messages_lisp
+[  0%] Built target geometry_msgs_generate_messages_nodejs
+[  0%] Built target std_msgs_generate_messages_nodejs
+[  0%] Built target _mav_interface_msgs_generate_messages_check_deps_Waypoint
+[  0%] Built target tf_generate_messages_nodejs
+[  0%] Built target nav_msgs_generate_messages_nodejs
+[  0%] Built target _mav_interface_msgs_generate_messages_check_deps_AutopilotStatusService
+[  0%] Built target _mav_interface_msgs_generate_messages_check_deps_AutopilotStatus
+[  0%] Built target _mav_interface_msgs_generate_messages_check_deps_Path
+[  0%] Built target _mav_interface_msgs_generate_messages_check_deps_FullStateStamped
+[  2%] [32mBuilding CXX object CMakeFiles/mav_interface_msgs.dir/src/conversions.cpp.o[0m
+[  2%] Built target _mav_interface_msgs_generate_messages_check_deps_OdomAndTrajectory
+[  2%] Built target _mav_interface_msgs_generate_messages_check_deps_FullStateTrajectory
+[ 25%] Built target mav_interface_msgs_generate_messages_py
+[ 42%] Built target mav_interface_msgs_generate_messages_cpp
+[ 70%] Built target mav_interface_msgs_generate_messages_eus
+[ 80%] Built target mav_interface_msgs_generate_messages_lisp
+[ 97%] Built target mav_interface_msgs_generate_messages_nodejs
+[ 97%] Built target mav_interface_msgs_generate_messages
+[100%] [32m[1mLinking CXX static library /home/mz/semantic_rotors/devel/.private/mav_interface_msgs/lib/libmav_interface_msgs.a[0m
+[100%] Built target mav_interface_msgs
