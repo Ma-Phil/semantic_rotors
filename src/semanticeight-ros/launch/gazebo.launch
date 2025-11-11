@@ -31,7 +31,7 @@
     <env name="GAZEBO_RESOURCE_PATH" value="${GAZEBO_RESOURCE_PATH}:$(find rotors_gazebo)/resource"/>
     <arg name="world_name" value="$(find semanticeight_ros)/worlds/$(arg world).world"/>
     <!-- <arg name="world_name" value="/home/mz/VLM_real/src/FSMP/rotors_simulator/rotors_gazebo/worlds/MAP_river_trees_27.world" /> -->
-    <arg name="gui" value="true"/>
+    <arg name="gui" value="false"/>
     <arg name="paused" value="false"/>
     <arg name="use_sim_time" value="true"/>
   </include>

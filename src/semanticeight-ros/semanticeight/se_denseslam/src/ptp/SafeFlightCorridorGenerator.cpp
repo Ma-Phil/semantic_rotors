@@ -80,6 +80,9 @@ PlanningResult SafeFlightCorridorGenerator::planPath(const Eigen::Vector3f& star
     path_->states.clear();
     ob::PlannerStatus solved = optimizingPlanner_->solve(solving_time_);
 
+    // 打印规划结果
+    std::cout << "规划结果: " << solved << std::endl;
+
     if (solved) {
         // Get non-simplified path and convert to Eigen
         ompl::geometric::SimpleSetup ss(si_);
